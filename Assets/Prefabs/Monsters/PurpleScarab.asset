@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a9926f34f9164469143cb80fe40ca4, type: 3}
   m_Name: PurpleScarab
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  speed: 0
-  dropExp: 0
+  maxLevel: 3
+  levelChance: 3c0000001400000014000000
+  maxHealth: 19000000230000002d000000
+  speed: 0.2
+  dropExp: 050000000700000009000000

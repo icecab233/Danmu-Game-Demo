@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7a9926f34f9164469143cb80fe40ca4, type: 3}
-  m_Name: CaveCaterpillar
+  m_Name: ExpHighTesst
   m_EditorClassIdentifier: 
   maxLevel: 2
   levelChance: 3200000032000000

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a9926f34f9164469143cb80fe40ca4, type: 3}
   m_Name: SlugQueen
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  speed: 0
-  dropExp: 0
+  maxLevel: 0
+  levelChance: 1e00000014000000140000000f00000005000000
+  maxHealth: 2800000032000000500000006400000082000000
+  speed: 0.1
+  dropExp: 080000000a00000010000000140000001a000000

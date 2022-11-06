@@ -11,7 +11,10 @@ public class Projectile2D : MonoBehaviour
     public GameObject Impact;
     public Rigidbody2D Rigidbody;
 
-    public float damage = 5.0f;
+    // 发射此发射物的玩家，用于计算击杀
+    public Player player;
+
+    public float damage = 1.0f;
 
     public void Start()
     {

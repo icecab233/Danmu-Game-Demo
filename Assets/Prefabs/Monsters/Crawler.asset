@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a9926f34f9164469143cb80fe40ca4, type: 3}
   m_Name: Crawler
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  speed: 0
-  dropExp: 0
+  maxLevel: 3
+  levelChance: 320000001e00000014000000
+  maxHealth: 0f0000001400000019000000
+  speed: 0.3
+  dropExp: 030000000400000005000000

@@ -79,6 +79,11 @@ public class PlayerBow : MonoBehaviour
     private void CreateArrow()
     {
         var arrow = Instantiate(ArrowPrefab, FireTransform);
+
+        // 将玩家信息存储在弓箭的Projectile2D组件中
+        arrow.GetComponent<Projectile2D>().player = GetComponent<Player>();
+        arrow.GetComponent<Projectile2D>().damage = GetComponent<Player>().attack;
+
         var sr = arrow.GetComponent<SpriteRenderer>();
         var rb = arrow.GetComponent<Rigidbody2D>();
 
@@ -89,14 +94,6 @@ public class PlayerBow : MonoBehaviour
         rb.velocity = speed * FireTransform.right * Mathf.Sign(Character.transform.lossyScale.x) * 1f;
 
         var characterCollider = Character.GetComponent<Collider>();
-
-        /*if (characterCollider != null)
-        {
-            Physics.IgnoreCollision(arrow.GetComponent<Collider>(), characterCollider);
-        }
-
-        arrow.gameObject.layer = 31; // TODO: Create layer in your project and disable collision for it (in physics settings)
-        Physics.IgnoreLayerCollision(31, 31, true); // Disable collision with other projectiles.*/
     }
 
 

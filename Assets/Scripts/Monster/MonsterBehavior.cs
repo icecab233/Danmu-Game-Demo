@@ -29,7 +29,7 @@ public class MonsterBehavior : MonoBehaviour
 
         // set default text
         healthText.text = "HP: " + health + " / " + maxHealth;
-        levelText.text = "LV. " + level;
+        levelText.text = "LV. " + (level+1);
     }
 
     void Update()
@@ -62,9 +62,6 @@ public class MonsterBehavior : MonoBehaviour
         maxHealth = monsterData.maxHealth[level];
         walkSpeed = monsterData.speed;
         health = maxHealth;
-
-        // 这里计算的level是以0开始的，改为以1开始
-        level++;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -72,19 +69,23 @@ public class MonsterBehavior : MonoBehaviour
         // Get Hit
         if (collision.GetComponent<Projectile2D>() != null)
         {
-            getHit(collision.GetComponent<Projectile2D>().damage);
+            getHit(collision.GetComponent<Projectile2D>().damage, collision.GetComponent<Projectile2D>().player);
             collision.GetComponent<Projectile2D>().BangSelf();
         }
     }
 
-    public void getHit(float damage)
+    public void getHit(float damage, Player player)
     {
         if (health > damage) health -= damage;
         else if (!dead)
         {
+            // 怪物死亡，播放死亡动画
             health = 0;
             dead = true;
             monster.Die();
+
+            //给玩家计算经验值
+            player.addExp(monsterData.dropExp[level]);
         }
         healthText.text = "HP: "+health+ " / "+maxHealth;
     }
