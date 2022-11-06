@@ -5355,7 +5355,7 @@ MonoBehaviour:
   ClipCharge: {fileID: 7400000, guid: 20538db717b94efeaa004e68d9284e3f, type: 2}
   FireTransform: {fileID: 5028308523976836178}
   ArrowPrefab: {fileID: 6582488765932189409, guid: 8da3359a3e0fedf4e810540d0a729587, type: 3}
-  speed: 30
+  speed: 15
   CreateArrows: 1
   ArmL: {fileID: 5028529352532357660}
   ChargeButtonDown: 0

@@ -48,6 +48,25 @@ public class Projectile2D : MonoBehaviour
         }
     }
 
+    public void BangSelf()
+    {
+        Impact.SetActive(true);
+        Destroy(GetComponent<SpriteRenderer>());
+        Destroy(GetComponent<Rigidbody>());
+        Destroy(GetComponent<Collider>());
+        Destroy(gameObject, 1);
+
+        foreach (var ps in Trail.GetComponentsInChildren<ParticleSystem>())
+        {
+            ps.Stop();
+        }
+
+        foreach (var tr in Trail.GetComponentsInChildren<TrailRenderer>())
+        {
+            tr.enabled = false;
+        }
+    }
+
     private void ReplaceImpactSound(GameObject other)
     {
         var sound = other.GetComponent<AudioSource>();

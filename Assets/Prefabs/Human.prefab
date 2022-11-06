@@ -722,6 +722,7 @@ MonoBehaviour:
   hp: 0
   hpMax: 0
   nameText: {fileID: 2333577419139302053}
+  attackCoolDownTime: 2
 --- !u!1 &1148429461579488
 GameObject:
   m_ObjectHideFlags: 0
@@ -5954,10 +5955,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u73A9\u5BB6\u59D3\u540D"
+  m_text: PlayerName
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 230e30c777df9204b899e32c500ec545, type: 2}
-  m_sharedMaterial: {fileID: 2859533922764530119, guid: 230e30c777df9204b899e32c500ec545, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
