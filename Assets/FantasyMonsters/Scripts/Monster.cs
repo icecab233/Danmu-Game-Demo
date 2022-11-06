@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.FantasyMonsters.Scripts.Tweens;
@@ -71,6 +72,13 @@ namespace Assets.FantasyMonsters.Scripts
         public void Die()
         {
             SetState(MonsterState.Death);
+            StartCoroutine(DieCoroutine());
+        }
+
+        IEnumerator DieCoroutine()
+        {
+            yield return new WaitForSeconds(1.5f);
+            Destroy(gameObject);
         }
 
         /// <summary>

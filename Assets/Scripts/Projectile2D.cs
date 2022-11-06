@@ -18,43 +18,12 @@ public class Projectile2D : MonoBehaviour
         Destroy(gameObject, 5);
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        Bang(other.gameObject);
-    }
-
-    public void OnCollisionEnter(Collision other)
-    {
-        Bang(other.gameObject);
-    }
-
-    private void Bang(GameObject other)
-    {
-        ReplaceImpactSound(other);
-        Impact.SetActive(true);
-        Destroy(GetComponent<SpriteRenderer>());
-        Destroy(GetComponent<Rigidbody>());
-        Destroy(GetComponent<Collider>());
-        Destroy(gameObject, 1);
-
-        foreach (var ps in Trail.GetComponentsInChildren<ParticleSystem>())
-        {
-            ps.Stop();
-        }
-
-        foreach (var tr in Trail.GetComponentsInChildren<TrailRenderer>())
-        {
-            tr.enabled = false;
-        }
-    }
-
     public void BangSelf()
     {
         Impact.SetActive(true);
         Destroy(GetComponent<SpriteRenderer>());
         Destroy(GetComponent<Rigidbody>());
         Destroy(GetComponent<Collider>());
-        Destroy(gameObject, 1);
 
         foreach (var ps in Trail.GetComponentsInChildren<ParticleSystem>())
         {
@@ -65,15 +34,7 @@ public class Projectile2D : MonoBehaviour
         {
             tr.enabled = false;
         }
-    }
 
-    private void ReplaceImpactSound(GameObject other)
-    {
-        var sound = other.GetComponent<AudioSource>();
-
-        if (sound != null && sound.clip != null)
-        {
-            Impact.GetComponent<AudioSource>().clip = sound.clip;
-        }
+        Destroy(gameObject);
     }
 }
