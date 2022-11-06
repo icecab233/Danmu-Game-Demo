@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using Assets.HeroEditor.Common.CharacterScripts;
 
 public class Player : MonoBehaviour
 {
@@ -28,14 +29,16 @@ public class Player : MonoBehaviour
     private TextMeshProUGUI asText;
 
     private PlayerBow playerBow;
+    private Character character;
 
     private float time;
 
-    private void Start()
+    private void Awake()
     {
-        Init();
-
         playerBow = GetComponent<PlayerBow>();
+        character = GetComponent<Character>();
+
+        Init();
     }
 
     private void Update()
@@ -59,6 +62,8 @@ public class Player : MonoBehaviour
         attack = PlayerData.attackOfLevel[0];
         attackSpeed = PlayerData.attackSpeedOfLevel[0];
         attackTime = PlayerData.attackTimeOfLevel[0];
+
+        character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[0]], HeroEditor.Common.Enums.EquipmentPart.Bow);
 
         displayWhenLevelUp();
     }
@@ -90,6 +95,8 @@ public class Player : MonoBehaviour
             attack = PlayerData.attackOfLevel[level];
             attackSpeed = PlayerData.attackSpeedOfLevel[level];
             attackTime = PlayerData.attackTimeOfLevel[level];
+            // »»¹­
+            character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[level]], HeroEditor.Common.Enums.EquipmentPart.Bow);
         }
 
         displayWhenLevelUp();

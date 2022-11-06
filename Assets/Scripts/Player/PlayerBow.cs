@@ -6,7 +6,7 @@ using System.Collections;
 
 public class PlayerBow : MonoBehaviour
 {
-    public Character Character;
+    private Character character;
     public AnimationClip ClipCharge;
     public Transform FireTransform;
     public GameObject ArrowPrefab;
@@ -27,10 +27,11 @@ public class PlayerBow : MonoBehaviour
 
     private void Start()
     {
-        Character.GetReady();
-        Character.Animator.SetInteger("WeaponType", 3);
+        character = GetComponent<Character>();
+        character.GetReady();
+        character.Animator.SetInteger("WeaponType", 3);
 
-        weapon = Character.BowRenderers[3].transform;
+        weapon = character.BowRenderers[3].transform;
     }
 
     /// <summary>
@@ -38,7 +39,7 @@ public class PlayerBow : MonoBehaviour
     /// </summary>
     public void LateUpdate()
     {
-        if (Character.IsReady())
+        if (character.IsReady())
         {
             RotateArm(ArmL, weapon, ArmL.position + 1000 * Vector3.right, -40, 40);
         }
@@ -61,14 +62,14 @@ public class PlayerBow : MonoBehaviour
     private void StartCharge()
     {
         _chargeTime = Time.time;
-        Character.Animator.SetInteger("Charge", 1);
+        character.Animator.SetInteger("Charge", 1);
     }
 
     private void endCharge()
     {
         var charged = Time.time - _chargeTime > ClipCharge.length;
 
-        Character.Animator.SetInteger("Charge", charged ? 2 : 3);
+        character.Animator.SetInteger("Charge", charged ? 2 : 3);
 
         if (charged && CreateArrows)
         {
@@ -90,10 +91,10 @@ public class PlayerBow : MonoBehaviour
         arrow.transform.localPosition = Vector3.zero;
         arrow.transform.localRotation = Quaternion.identity;
         arrow.transform.SetParent(null);
-        sr.sprite = Character.Bow.Single(j => j.name == "Arrow");
-        rb.velocity = speed * FireTransform.right * Mathf.Sign(Character.transform.lossyScale.x) * 1f;
+        sr.sprite = character.Bow.Single(j => j.name == "Arrow");
+        rb.velocity = speed * FireTransform.right * Mathf.Sign(character.transform.lossyScale.x) * 1f;
 
-        var characterCollider = Character.GetComponent<Collider>();
+        var characterCollider = character.GetComponent<Collider>();
     }
 
 

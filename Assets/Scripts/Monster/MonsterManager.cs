@@ -27,7 +27,7 @@ public class MonsterManager : MonoBehaviour
             int spawnPosId = Random.Range(0, spawnPos.Length);
             int spawnMonsterId = Random.Range(0, monstersPrefab.Length);
             GameObject newMonster = Instantiate(monstersPrefab[spawnMonsterId], spawnPos[spawnPosId].transform);
-            newMonster.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+            newMonster.transform.localScale = new Vector3(0.25f, 0.25f, 1);
 
             yield return new WaitForSeconds(Random.Range(spwanInternalBase - spawnInternalRandom, spwanInternalBase + spawnInternalRandom));
         }

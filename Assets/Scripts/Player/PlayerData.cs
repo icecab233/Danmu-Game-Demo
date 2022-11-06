@@ -1,3 +1,4 @@
+using UnityEngine;
 public static class PlayerData
 {
     // 玩家等级上限
@@ -12,4 +13,7 @@ public static class PlayerData
     public static int[] attackSpeedOfLevel = { 10, 11, 12, 13, 14, 15 };
     // 每个等级的攻击间隔时间（攻速的实际效果）
     public static float[] attackTimeOfLevel = { 3.0f, 2.75f, 2.5f, 2.25f, 2f, 1.5f };
+
+    // 每个等级装备的弓的编号
+    public static int[] bowIdOfLevel = { 7, 25, 0, 4, 3, 1};
 }

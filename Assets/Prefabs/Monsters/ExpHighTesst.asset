@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLevel: 2
   levelChance: 3200000032000000
-  maxHealth: 0a00000014000000
+  maxHealth: 0a0000000a000000
   speed: 0.5
-  dropExp: 0200000004000000
+  dropExp: 6400000064000000

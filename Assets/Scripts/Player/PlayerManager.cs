@@ -39,12 +39,13 @@ public class PlayerManager : MonoBehaviour
         players[playerCount] = Instantiate(defaultPlayerPrefab, spawnPos[playerCount].transform);
         players[playerCount].GetComponent<Player>().changeName(name);
         players[playerCount].transform.localPosition = new Vector3(0, 0, 0);
-        players[playerCount].transform.localScale = new Vector3(0.7f, 0.7f, 0);
+        players[playerCount].transform.localScale = new Vector3(0.5f, 0.5f, 0);
 
         // Random
         Character character = players[playerCount].GetComponent<Character>();
         character.Equip(character.SpriteCollection.Helmet.Random(), EquipmentPart.Helmet);
         character.Equip(character.SpriteCollection.Helmet.Random(), EquipmentPart.Boots);
+
 
         playerCount++;
         return playerCount;
