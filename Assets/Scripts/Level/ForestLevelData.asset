@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006f09b53bf7d9c4cab81b33513c15d9, type: 3}
   m_Name: ForestLevelData
   m_EditorClassIdentifier: 
+  levelName: Forest
   levelBackground: {fileID: 21300000, guid: 0096b0e0342e4f941b44fcdb98805d16, type: 3}
   difficulty: 1
   waveCount: 3
@@ -20,10 +21,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8fb5867b63704894cbfd430bbaa3eaac, type: 2}
   - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
   waveTime:
-  - 10
-  - 20
-  - 20
+  - 60
+  - 120
+  - 120
   wavePrepareTime:
-  - 5
   - 10
-  - 10
+  - 20
+  - 20

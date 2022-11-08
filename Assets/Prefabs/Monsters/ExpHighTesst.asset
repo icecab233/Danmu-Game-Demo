@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLevel: 2
   levelChance: 3200000032000000
-  maxHealth: 1400000014000000
+  maxHealth: 0a0000000a000000
   speed: 0.5
   dropExp: 6400000064000000
-  attack: 10
+  attack: 50
   attackSpeed: 5

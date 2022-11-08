@@ -135,8 +135,11 @@ public class MonsterBehavior : MonoBehaviour
     {
         while (true)
         {
-            monster.Attack();
-            playerCollision.GetComponent<Player>().Attacked(monsterData.attack);
+            if (playerCollision != null)
+            {
+                monster.Attack();
+                playerCollision.GetComponent<Player>().Attacked(monsterData.attack);
+            }
             yield return new WaitForSeconds(coolDownTime);
         }
     }

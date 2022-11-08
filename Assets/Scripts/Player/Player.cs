@@ -130,6 +130,8 @@ public class Player : MonoBehaviour
         character.Animator.SetBool("Ready", false);
         character.Animator.SetInteger("State", 6);
         StartCoroutine(DieCoroutine());
+
+        PlayerManager.playerDie(gameObject);
     }
 
     IEnumerator DieCoroutine()
