@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     public int attackSpeed;
     public float attackTime;
 
+    // 死亡后摧毁对象延后时间
+    public float dieTime = 2.0f;
+
     private int exp;
 
     [SerializeField]
@@ -27,6 +30,8 @@ public class Player : MonoBehaviour
     private TextMeshProUGUI atkText;
     [SerializeField]
     private TextMeshProUGUI asText;
+    [SerializeField]
+    private TextMeshProUGUI healthText;
 
     private PlayerBow playerBow;
     private Character character;
@@ -65,7 +70,7 @@ public class Player : MonoBehaviour
 
         character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[0]], HeroEditor.Common.Enums.EquipmentPart.Bow);
 
-        displayWhenLevelUp();
+        displayText();
     }
 
     public void changeName(string _name)
@@ -95,15 +100,46 @@ public class Player : MonoBehaviour
             attack = PlayerData.attackOfLevel[level];
             attackSpeed = PlayerData.attackSpeedOfLevel[level];
             attackTime = PlayerData.attackTimeOfLevel[level];
+            hpMax = PlayerData.hpMaxOfLevel[level];
+            hp = hpMax;
             // 换弓
             character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[level]], HeroEditor.Common.Enums.EquipmentPart.Bow);
         }
 
-        displayWhenLevelUp();
+        displayText();
     }
 
-    // 在升级后，更新人物附近的文字
-    private void displayWhenLevelUp()
+    // 外部调用，角色受伤
+    public void Attacked(int damage)
+    {
+        if (hp > damage)
+        {
+            hp -= damage;
+            displayText();
+        } else
+        {
+            hp = 0;
+            displayText();
+            Die();
+        }
+    }
+
+    // 角色死亡
+    private void Die()
+    {
+        character.Animator.SetBool("Ready", false);
+        character.Animator.SetInteger("State", 6);
+        StartCoroutine(DieCoroutine());
+    }
+
+    IEnumerator DieCoroutine()
+    {
+        yield return new WaitForSeconds(dieTime);
+        Destroy(gameObject);
+    }
+
+    // 更新人物附近的文字
+    private void displayText()
     {
         // level
         levelText.text = "LV. " + level;
@@ -124,5 +160,8 @@ public class Player : MonoBehaviour
         // 攻击力和攻速
         atkText.text = "ATK\n" + attack;
         asText.text = "AS\n" + attackSpeed;
+
+        // 生命值
+        healthText.text = "HP: " + hp + "/" + hpMax;
     }
 }

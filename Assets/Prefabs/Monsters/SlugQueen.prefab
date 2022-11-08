@@ -713,6 +713,7 @@ GameObject:
   - component: {fileID: 4965562313073616598}
   - component: {fileID: 6907889944205420885}
   - component: {fileID: 4789339075220134545}
+  - component: {fileID: 7745468695449481769}
   m_Layer: 0
   m_Name: SlugQueen
   m_TagString: Untagged
@@ -857,6 +858,27 @@ MonoBehaviour:
   maxHealth: 30
   walkSpeed: 0.3
   level: 0
-  dead: 0
+  currentMonsterStatus: 0
   healthText: {fileID: 2563179909325971813}
   levelText: {fileID: 1408086667455939056}
+--- !u!50 &7745468695449481769
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8924111716705014194}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

@@ -713,6 +713,7 @@ GameObject:
   - component: {fileID: 6029624949020416797}
   - component: {fileID: 5231351123779736734}
   - component: {fileID: 7428771987004690628}
+  - component: {fileID: 1324311795271958310}
   m_Layer: 0
   m_Name: Crawler
   m_TagString: Untagged
@@ -857,6 +858,27 @@ MonoBehaviour:
   maxHealth: 15
   walkSpeed: 0.3
   level: 0
-  dead: 0
+  currentMonsterStatus: 0
   healthText: {fileID: 668135101388511446}
   levelText: {fileID: 6179556837310459008}
+--- !u!50 &1324311795271958310
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7826252571554262137}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

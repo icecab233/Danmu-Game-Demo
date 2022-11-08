@@ -17,3 +17,5 @@ MonoBehaviour:
   maxHealth: 1e000000280000003c000000
   speed: 0.3
   dropExp: 06000000080000000c000000
+  attack: 10
+  attackSpeed: 5

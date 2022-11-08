@@ -13,4 +13,8 @@ public class MonsterData : ScriptableObject
     public int[] maxHealth;
     public float speed;
     public int[] dropExp;
+
+    public int attack;
+    // 攻速，实际攻击间隔时间为：x = 10/as
+    public float attackSpeed;
 }
