@@ -2,9 +2,24 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using Assets.HeroEditor.Common.CharacterScripts;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    /// <summary>
+    /// 玩家类型：
+    ///     1. archer：使用PlayerBow类进行弓箭射击
+    ///     2. warrior: 使用XXX类进行近战攻击
+    ///     3. defender：只防御，不进行攻击
+    /// </summary>
+    public enum PlayerType
+    {
+        archer,
+        warrior,
+        defender
+    }
+    public PlayerType playerType;
+
     [SerializeField]
     private string playerName;
     public int level;
@@ -25,13 +40,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI levelText;
     [SerializeField]
-    private TextMeshProUGUI expText;
+    private Image EXPBar;
     [SerializeField]
     private TextMeshProUGUI atkText;
     [SerializeField]
     private TextMeshProUGUI asText;
     [SerializeField]
-    private TextMeshProUGUI healthText;
+    private Image HPBar;
 
     private PlayerBow playerBow;
     private Character character;
@@ -40,7 +55,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        playerBow = GetComponent<PlayerBow>();
         character = GetComponent<Character>();
 
         Init();
@@ -48,11 +62,17 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // 在一定时间间隔内自动攻击
-        if (Time.time - time >= attackTime)
+        switch (playerType)
         {
-            time = Time.time;
-            playerBow.BowAttack();
+            case PlayerType.archer:
+                // 在一定时间间隔内自动攻击
+                if (Time.time - time >= attackTime)
+                {
+                    time = Time.time;
+                    playerBow.BowAttack();
+                }
+                break;
+
         }
     }
 
@@ -60,17 +80,33 @@ public class Player : MonoBehaviour
     {
         exp = 0;
         level = 0;
-        hp = 100;
-        hpMax = 100;
         time = Time.time;
 
-        attack = PlayerData.attackOfLevel[0];
-        attackSpeed = PlayerData.attackSpeedOfLevel[0];
-        attackTime = PlayerData.attackTimeOfLevel[0];
+        switch (playerType)
+        {
+            case PlayerType.archer:
+                hpMax = PlayerData.hpMaxOfLevel[level];
+                hp = hpMax;
+                attack = PlayerData.attackOfLevel[0];
+                attackSpeed = PlayerData.attackSpeedOfLevel[0];
+                attackTime = PlayerData.attackTimeOfLevel[0];
 
-        character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[0]], HeroEditor.Common.Enums.EquipmentPart.Bow);
+                playerBow = GetComponent<PlayerBow>();
+                character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[0]], HeroEditor.Common.Enums.EquipmentPart.Bow);
+                displayText();
+                break;
+            case PlayerType.warrior:
+                break;
+            case PlayerType.defender:
+                hpMax = 1000000;
+                hp = 100000;
+                attack = 0;
+                attackSpeed = 0;
+                attackTime = 0f;
+                break;
+        }
 
-        displayText();
+        
     }
 
     public void changeName(string _name)
@@ -89,6 +125,8 @@ public class Player : MonoBehaviour
     // 外部调用，提升角色exp，需要计算等级提升等
     public void addExp(int newExp)
     {
+        if (playerType == PlayerType.defender) return;
+
         exp += newExp;
 
         // level up
@@ -112,6 +150,8 @@ public class Player : MonoBehaviour
     // 外部调用，角色受伤
     public void Attacked(int damage)
     {
+        if (playerType == PlayerType.defender) return;
+
         if (hp > damage)
         {
             hp -= damage;
@@ -131,7 +171,7 @@ public class Player : MonoBehaviour
         character.Animator.SetInteger("State", 6);
         StartCoroutine(DieCoroutine());
 
-        PlayerManager.playerDie(gameObject);
+        PlayerManager.Instance.playerDie(gameObject);
     }
 
     IEnumerator DieCoroutine()
@@ -149,14 +189,14 @@ public class Player : MonoBehaviour
         // 根据百分比，编辑exptext，显示升级进度
         if (level == PlayerData.maxLevel)
         {
-            expText.text = "NEXT: 100%";
+            EXPBar.fillAmount = 1.0f;
             return;
         } else
         {
             int denominator = PlayerData.expOfLevel[level + 1] - PlayerData.expOfLevel[level];
             int numerator = exp - PlayerData.expOfLevel[level];
-            double percent = (numerator * 1.0) / (denominator * 1.0) * 100;
-            expText.text = "NEXT: " + (int)percent + "%";
+            float percent = (numerator * 1.0f) / (denominator * 1.0f);
+            EXPBar.fillAmount = percent;
         }
 
         // 攻击力和攻速
@@ -164,6 +204,23 @@ public class Player : MonoBehaviour
         asText.text = "AS\n" + attackSpeed;
 
         // 生命值
-        healthText.text = "HP: " + hp + "/" + hpMax;
+        HPBar.fillAmount = hp * 1.0f / hpMax;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (playerType)
+        {
+            case PlayerType.warrior:
+                // attack
+                break;
+            case PlayerType.defender:
+                if (collision.gameObject.GetComponent<MonsterBehavior>() != null)
+                {
+                    GetComponent<Character>().Animator.SetTrigger("Slash");
+                    collision.gameObject.GetComponent<MonsterBehavior>().getHit(100000f, this);
+                }
+                break;
+        }
     }
 }

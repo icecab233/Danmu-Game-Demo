@@ -4,19 +4,40 @@ using Assets.HeroEditor.Common.CommonScripts;
 using HeroEditor.Common.Enums;
 using System.Collections.Generic;
 
+// Singleton Class
 public class PlayerManager : MonoBehaviour
 {
+    // Singleton
+    private static PlayerManager _instance;
+    public static PlayerManager Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+
     public GameObject defaultPlayerPrefab;
 
-    public static List<GameObject> players;
+    public List<GameObject> players;
     public GameObject[] spawnPos;
 
-    public static bool[] posOccupied;
-    public static Dictionary<GameObject, int> posOfPlayer;
+    public bool[] posOccupied;
+    public Dictionary<GameObject, int> posOfPlayer;
+
+    public GameObject[] bots;
+    private const int lineCount = 5;
 
     [SerializeField]
     private int maxPlayerNum;
-    public static int playerCount = 0;
+    public int playerCount = 0;
 
     void Start()
     {
@@ -24,6 +45,7 @@ public class PlayerManager : MonoBehaviour
         posOfPlayer = new Dictionary<GameObject, int>();
 
         players = new List<GameObject>();
+        refreshBots();
     }
 
     void Update()
@@ -31,7 +53,7 @@ public class PlayerManager : MonoBehaviour
         // FOR TEST
         if (Input.GetKeyDown(KeyCode.A))
         {
-            addNewPlayer("test");
+            addNewPlayer("NIA-AIN");
         }
     }
 
@@ -60,18 +82,24 @@ public class PlayerManager : MonoBehaviour
         // Random
         Character character = player.GetComponent<Character>();
         character.Equip(character.SpriteCollection.Helmet.Random(), EquipmentPart.Helmet);
-        character.Equip(character.SpriteCollection.Helmet.Random(), EquipmentPart.Boots);
-
+        character.Equip(character.SpriteCollection.Armor.Random(), EquipmentPart.Armor);
+        character.SetBody(character.SpriteCollection.Hair.Random(), BodyPart.Hair, CharacterExtensions.RandomColor);
+        character.SetBody(character.SpriteCollection.Eyebrows.Random(), BodyPart.Eyebrows);
+        character.SetBody(character.SpriteCollection.Eyes.Random(), BodyPart.Eyes, CharacterExtensions.RandomColor);
+        character.SetBody(character.SpriteCollection.Mouth.Random(), BodyPart.Mouth);
 
         playerCount++;
+        refreshBots();
         return playerCount;
     }
 
-    public static void playerDie(GameObject playerObject)
+    public void playerDie(GameObject playerObject)
     {
         int oldPosId = posOfPlayer[playerObject];
         posOccupied[oldPosId] = false;
         playerCount--;
+
+        refreshBots();
     }
 
     public void randomPlayer(int id)
@@ -82,7 +110,13 @@ public class PlayerManager : MonoBehaviour
             return;
         }
 
-        players[id].GetComponent<Character>().Randomize();
+        Character character = players[id].GetComponent<Character>();
+        character.Equip(character.SpriteCollection.Helmet.Random(), EquipmentPart.Helmet);
+        character.Equip(character.SpriteCollection.Armor.Random(), EquipmentPart.Armor);
+        character.SetBody(character.SpriteCollection.Hair.Random(), BodyPart.Hair, CharacterExtensions.RandomColor);
+        character.SetBody(character.SpriteCollection.Eyebrows.Random(), BodyPart.Eyebrows);
+        character.SetBody(character.SpriteCollection.Eyes.Random(), BodyPart.Eyes, CharacterExtensions.RandomColor);
+        character.SetBody(character.SpriteCollection.Mouth.Random(), BodyPart.Mouth);
     }
 
 
@@ -95,5 +129,17 @@ public class PlayerManager : MonoBehaviour
                 return i;
         }
         return -1;
+    }
+
+    // 更新bot的存在情况。当玩家变动时调用
+    // 某一排有玩家时，关闭bot
+    // 某一排没玩家时，开启bot
+    private void refreshBots()
+    {
+        for (int i = 0; i < lineCount; i++)
+            if (posOccupied[i] || posOccupied[i + 5])
+                bots[i].SetActive(false);
+            else
+                bots[i].SetActive(true);
     }
 }

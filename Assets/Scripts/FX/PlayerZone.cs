@@ -10,7 +10,7 @@ public class PlayerZone : MonoBehaviour
 
     void Update()
     {
-        if (PlayerManager.posOccupied[posId])
+        if (PlayerManager.Instance.posOccupied[posId])
         {
             playerZone1.SetActive(true);
             playerZone2.SetActive(false);

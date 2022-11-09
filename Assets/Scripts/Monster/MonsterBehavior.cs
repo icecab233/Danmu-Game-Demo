@@ -153,7 +153,11 @@ public class MonsterBehavior : MonoBehaviour
 
     public void getHit(float damage, Player player)
     {
-        if (health > damage) health -= damage;
+        if (health > damage)
+        {
+            health -= damage;
+            healthText.text = "HP: " + health + " / " + maxHealth;
+        }
         else if (currentMonsterStatus != MonsterStatus.Die)
         {
             Die();
@@ -161,7 +165,6 @@ public class MonsterBehavior : MonoBehaviour
             //给玩家计算经验值
             player.addExp(monsterData.dropExp[level]);
         }
-        healthText.text = "HP: "+health+ " / "+maxHealth;
     }
 
     // 怪物死亡行为

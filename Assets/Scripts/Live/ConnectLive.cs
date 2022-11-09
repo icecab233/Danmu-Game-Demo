@@ -28,8 +28,8 @@ public class ConnectLive : MonoBehaviour
     private WebSocketBLiveClient m_WebSocketBLiveClient;
     private InteractivePlayHeartBeat m_PlayHeartBeat;
     private string gameId;
-    public string accessKeySecret;
-    public string accessKeyId;
+    private const string accessKeySecret = "o5kBVXQYiYLbjQIvqX7rEJ4wmCdKHm";
+    private const string accessKeyId = "eLlAG7R9VRVmBeGPA5UmlUeH";
     public string appId;
 
     public Action ConnectSuccess;
@@ -126,6 +126,8 @@ public class ConnectLive : MonoBehaviour
         sb.Append("¸ö");
         sb.Append(sendGift.giftName);
         Debug.Log(sb);
+
+        liveManager.OnGift(sendGift.userName, sendGift.userName, (int)sendGift.giftNum);
     }
 
     private void WebSocketBLiveClientOnDanmaku(Dm dm)
