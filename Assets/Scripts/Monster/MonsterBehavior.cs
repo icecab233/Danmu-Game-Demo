@@ -8,7 +8,7 @@ using Assets.HeroEditor.Common.ExampleScripts;
 public class MonsterBehavior : MonoBehaviour
 {
     public MonsterData monsterData;
-    [HideInInspector]
+
     public float health;
     public float maxHealth;
     public float walkSpeed;
@@ -176,6 +176,6 @@ public class MonsterBehavior : MonoBehaviour
         monster.Die();
 
         // 维护存活怪物列表
-        WaveManager.livingMonsters.Remove(gameObject);
+        WaveManager.Instance.livingMonsters.Remove(gameObject);
     }
 }

@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    // Singleton
+    private static WaveManager _instance;
+    public static WaveManager Instance { get { return _instance; } }
+
     public LevelData levelData;
     public GameObject[] spawnPos;
 
@@ -25,12 +29,22 @@ public class WaveManager : MonoBehaviour
     // 准备或战斗剩余的时间，以供访问
     public float leftTime;
 
-    public static List<GameObject> livingMonsters;
+    public List<GameObject> livingMonsters;
 
     private IEnumerator coroutine = null;
 
     private void Awake()
     {
+        // Singleton
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
         livingMonsters = new List<GameObject>();
 
         currentWaveStatus = WaveStatus.Stop;

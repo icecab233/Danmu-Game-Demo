@@ -5365,7 +5365,7 @@ Transform:
   m_GameObject: {fileID: 5027229757593137776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.1, y: -3.04, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5028565718917324596}
@@ -5688,6 +5688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerType: 0
+  playerStatus: 0
   playerName: 
   level: 0
   hp: 100
@@ -5721,7 +5722,6 @@ MonoBehaviour:
   ArrowPrefab: {fileID: 6582488765932189409, guid: 8da3359a3e0fedf4e810540d0a729587, type: 3}
   speed: 15
   CreateArrows: 1
-  rageMode: 0
   ArmL: {fileID: 5028529352532357660}
   ChargeButtonDown: 0
   ChargeButtonUp: 0

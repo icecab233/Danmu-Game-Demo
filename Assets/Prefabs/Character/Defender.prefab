@@ -719,6 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerType: 2
+  playerStatus: 0
   playerName: 
   level: 0
   hp: 0

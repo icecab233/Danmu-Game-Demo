@@ -12,7 +12,11 @@ public class LiveManager : MonoBehaviour
         switch (danmu)
         {
             case "加入":
-                playerManager.addNewPlayer(userName);
+                int log =playerManager.addNewPlayer(userName);
+                if (log < 0)
+                {
+                    Debug.Log("加入失败，代码" + log);
+                }
                 break;
             case "随机":
                 int id = playerManager.getIdByName(userName);
@@ -46,7 +50,7 @@ public class LiveManager : MonoBehaviour
             case "辣条":
                 if (giftNum == 1)
                 {
-                    playerManager.players[id].GetComponent<Player>().addExp(100);
+                    playerManager.playerList[id].addExp(100);
                 } else if (giftNum == 2)
                 {
                     playerManager.rageModeForAll(20f);

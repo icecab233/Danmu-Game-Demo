@@ -13,7 +13,6 @@ public class PlayerBow : MonoBehaviour
     public GameObject ArrowPrefab;
     public float speed = 30f;
     public bool CreateArrows;
-    public bool rageMode = false;
 
     [SerializeField]
     private Transform ArmL;
@@ -53,11 +52,26 @@ public class PlayerBow : MonoBehaviour
         StartCoroutine(BowAttackCoroutine());
     }
 
+    // 创造一个双箭的拉弓射箭行为
+    public void DoubleBowAttack()
+    {
+        StartCoroutine(DoubleBowAttackCoroutine());
+
+    }
+
     IEnumerator BowAttackCoroutine()
     {
         StartCharge();
         yield return new WaitForSeconds(1.0f);
-        endCharge();
+        endCharge(false);
+        yield break;
+    }
+
+    IEnumerator DoubleBowAttackCoroutine()
+    {
+        StartCharge();
+        yield return new WaitForSeconds(1.0f);
+        endCharge(true);
         yield break;
     }
 
@@ -67,7 +81,7 @@ public class PlayerBow : MonoBehaviour
         character.Animator.SetInteger("Charge", 1);
     }
 
-    private void endCharge()
+    private void endCharge(bool Double)
     {
         var charged = Time.time - _chargeTime > ClipCharge.length;
 
@@ -76,7 +90,7 @@ public class PlayerBow : MonoBehaviour
         if (charged && CreateArrows)
         {
             CreateArrow(Vector3.zero);
-            if (rageMode) CreateArrow(new Vector3(0f, 0.17f, 0f));
+            if (Double) CreateArrow(new Vector3(0f, 0.17f, 0f));
         }
     }
 

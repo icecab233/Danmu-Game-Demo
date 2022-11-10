@@ -3,6 +3,8 @@ using TMPro;
 using System.Collections;
 using Assets.HeroEditor.Common.CharacterScripts;
 using UnityEngine.UI;
+using Assets.HeroEditor.Common.CommonScripts;
+using HeroEditor.Common.Enums;
 
 public class Player : MonoBehaviour
 {
@@ -20,8 +22,22 @@ public class Player : MonoBehaviour
     }
     public PlayerType playerType;
 
-    [SerializeField]
-    private string playerName;
+    /// <summary>
+    /// 玩家状态：
+    ///     1. idle，待命
+    ///     2. attack，开始自动攻击
+    ///     3. rage，狂暴自动攻击
+    /// </summary>
+    
+    public enum PlayerStatus
+    {
+        idle,
+        attack,
+        rage
+    }
+    public PlayerStatus playerStatus;
+
+    public string playerName;
     public int level;
     public int hp;
     public int hpMax;
@@ -72,7 +88,17 @@ public class Player : MonoBehaviour
                 if (Time.time - time >= attackTime)
                 {
                     time = Time.time;
-                    playerBow.BowAttack();
+                    switch (playerStatus)
+                    {
+                        case PlayerStatus.idle:
+                            break;
+                        case PlayerStatus.attack:
+                            playerBow.BowAttack();
+                            break;
+                        case PlayerStatus.rage:
+                            playerBow.DoubleBowAttack();
+                            break;
+                    }
                 }
                 break;
 
@@ -84,6 +110,9 @@ public class Player : MonoBehaviour
         exp = 0;
         level = 0;
         time = Time.time;
+
+        // TO DO 应该由外部控制状态
+        playerStatus = PlayerStatus.attack;
 
         switch (playerType)
         {
@@ -120,11 +149,6 @@ public class Player : MonoBehaviour
         nameText.text = playerName;
     }
 
-    public string getName()
-    {
-        return playerName;
-    }
-
     // 外部调用，提升角色exp，需要计算等级提升等
     public void addExp(int newExp)
     {
@@ -152,6 +176,18 @@ public class Player : MonoBehaviour
         displayText();
     }
 
+    // 外部调用，角色随机化
+    public void Randomize()
+    {
+        Character character = GetComponent<Character>();
+        character.Equip(character.SpriteCollection.Helmet.Random(), EquipmentPart.Helmet);
+        character.Equip(character.SpriteCollection.Armor.Random(), EquipmentPart.Armor);
+        character.SetBody(character.SpriteCollection.Hair.Random(), BodyPart.Hair, CharacterExtensions.RandomColor);
+        character.SetBody(character.SpriteCollection.Eyebrows.Random(), BodyPart.Eyebrows);
+        character.SetBody(character.SpriteCollection.Eyes.Random(), BodyPart.Eyes, CharacterExtensions.RandomColor);
+        character.SetBody(character.SpriteCollection.Mouth.Random(), BodyPart.Mouth);
+    }
+
     // 外部调用，角色受伤
     public void Attacked(int damage)
     {
@@ -176,7 +212,7 @@ public class Player : MonoBehaviour
         character.Animator.SetInteger("State", 6);
         StartCoroutine(DieCoroutine());
 
-        PlayerManager.Instance.playerDie(gameObject);
+        PlayerManager.Instance.playerDie(this);
     }
 
     IEnumerator DieCoroutine()
@@ -238,11 +274,12 @@ public class Player : MonoBehaviour
     IEnumerator RageCoroutine(float time)
     {
         rageFX.Play();
-        playerBow.rageMode = true;
+        PlayerStatus oldPlayerStatus = playerStatus;
+        playerStatus = PlayerStatus.rage;
 
         yield return new WaitForSeconds(time);
 
-        playerBow.rageMode = false;
+        playerStatus = oldPlayerStatus;
         rageFX.Stop();
     }
 }
