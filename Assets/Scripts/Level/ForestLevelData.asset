@@ -23,7 +23,7 @@ MonoBehaviour:
   waveTime:
   - 60
   - 120
-  - 120
+  - 500
   wavePrepareTime:
   - 10
   - 20

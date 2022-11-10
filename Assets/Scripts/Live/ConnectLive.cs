@@ -127,7 +127,7 @@ public class ConnectLive : MonoBehaviour
         sb.Append(sendGift.giftName);
         Debug.Log(sb);
 
-        liveManager.OnGift(sendGift.userName, sendGift.userName, (int)sendGift.giftNum);
+        liveManager.OnGift(sendGift.userName, sendGift.giftName, (int)sendGift.giftNum);
     }
 
     private void WebSocketBLiveClientOnDanmaku(Dm dm)

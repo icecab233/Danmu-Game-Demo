@@ -3,6 +3,7 @@ using System;
 using Assets.HeroEditor.Common.CharacterScripts;
 using UnityEngine;
 using System.Collections;
+using Assets.HeroEditor4D.SimpleColorPicker.Scripts;
 
 public class PlayerBow : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerBow : MonoBehaviour
     public GameObject ArrowPrefab;
     public float speed = 30f;
     public bool CreateArrows;
+    public bool rageMode = false;
 
     [SerializeField]
     private Transform ArmL;
@@ -73,11 +75,12 @@ public class PlayerBow : MonoBehaviour
 
         if (charged && CreateArrows)
         {
-            CreateArrow();
+            CreateArrow(Vector3.zero);
+            if (rageMode) CreateArrow(new Vector3(0f, 0.17f, 0f));
         }
     }
 
-    private void CreateArrow()
+    private void CreateArrow(Vector3 increment)
     {
         var arrow = Instantiate(ArrowPrefab, FireTransform);
 
@@ -88,7 +91,7 @@ public class PlayerBow : MonoBehaviour
         var sr = arrow.GetComponent<SpriteRenderer>();
         var rb = arrow.GetComponent<Rigidbody2D>();
 
-        arrow.transform.localPosition = Vector3.zero;
+        arrow.transform.localPosition = Vector3.zero + increment;
         arrow.transform.localRotation = Quaternion.identity;
         arrow.transform.SetParent(null);
         sr.sprite = character.Bow.Single(j => j.name == "Arrow");
@@ -101,8 +104,6 @@ public class PlayerBow : MonoBehaviour
     /// <summary>
     /// Selected arm to position (world space) rotation, with limits.
     /// </summary>
-    private float AngleToTarget;
-    private float AngleToArm;
     public void RotateArm(Transform arm, Transform weapon, Vector2 target, float angleMin, float angleMax) // TODO: Very hard to understand logic.
     {
         target = arm.transform.InverseTransformPoint(target);
@@ -110,9 +111,6 @@ public class PlayerBow : MonoBehaviour
         var angleToTarget = Vector2.SignedAngle(Vector2.right, target);
         var angleToArm = Vector2.SignedAngle(weapon.right, arm.transform.right) * Math.Sign(weapon.lossyScale.x);
         var fix = weapon.InverseTransformPoint(arm.transform.position).y / target.magnitude;
-
-        AngleToTarget = angleToTarget;
-        AngleToArm = angleToArm;
 
         if (fix < -1) fix = -1;
         else if (fix > 1) fix = 1;

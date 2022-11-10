@@ -733,6 +733,8 @@ MonoBehaviour:
   atkText: {fileID: 0}
   asText: {fileID: 0}
   HPBar: {fileID: 0}
+  levelUpFX: {fileID: 0}
+  rageFX: {fileID: 0}
 --- !u!61 &1983508403575181537
 BoxCollider2D:
   m_ObjectHideFlags: 0

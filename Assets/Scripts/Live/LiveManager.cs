@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,9 @@ public class LiveManager : MonoBehaviour
                     playerManager.randomPlayer(id);
                 }
                 break;
+            case "狂暴":
+                playerManager.rageModeForAll(15f);
+                break;
         }
     }
 
@@ -35,6 +39,7 @@ public class LiveManager : MonoBehaviour
             Debug.Log("接受礼物：不存在用户");
             return;
         }
+        Debug.Log("GIFTNAME: " + giftName);
 
         switch (giftName)
         {
@@ -44,7 +49,7 @@ public class LiveManager : MonoBehaviour
                     playerManager.players[id].GetComponent<Player>().addExp(100);
                 } else if (giftNum == 2)
                 {
-
+                    playerManager.rageModeForAll(20f);
                 }
                 break;
         }

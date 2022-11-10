@@ -55,6 +55,10 @@ public class PlayerManager : MonoBehaviour
         {
             addNewPlayer("NIA-AIN");
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            rageModeForAll(20.0f);
+        }
     }
 
     public int addNewPlayer(string name)
@@ -141,5 +145,13 @@ public class PlayerManager : MonoBehaviour
                 bots[i].SetActive(false);
             else
                 bots[i].SetActive(true);
+    }
+
+    // 全员开启rage模式
+    public void rageModeForAll(float time) {
+        foreach(var player in players)
+        {
+            player.GetComponent<Player>().StartRage(time);
+        }
     }
 }

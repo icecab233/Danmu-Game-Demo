@@ -51,6 +51,9 @@ public class Player : MonoBehaviour
     private PlayerBow playerBow;
     private Character character;
 
+    public ParticleSystem levelUpFX;
+    public ParticleSystem rageFX;
+
     private float time;
 
     private void Awake()
@@ -142,6 +145,8 @@ public class Player : MonoBehaviour
             hp = hpMax;
             // 换弓
             character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[level]], HeroEditor.Common.Enums.EquipmentPart.Bow);
+            // FX
+            levelUpFX.Play();
         }
 
         displayText();
@@ -222,5 +227,22 @@ public class Player : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    // 供外部调用，开始rage模式
+    public void StartRage(float time)
+    {
+        StartCoroutine(RageCoroutine(time));
+    }
+
+    IEnumerator RageCoroutine(float time)
+    {
+        rageFX.Play();
+        playerBow.rageMode = true;
+
+        yield return new WaitForSeconds(time);
+
+        playerBow.rageMode = false;
+        rageFX.Stop();
     }
 }
