@@ -8,6 +8,7 @@ public class LiveManager : MonoBehaviour
     public PlayerManager playerManager;
     public StringEvent AddNewPlayerEvent;
     public StringEvent RandomPlayerEvent;
+    public VoidEvent RangeModeEvent;
 
     public void OnDanmu(string userName, string danmu)
     {
