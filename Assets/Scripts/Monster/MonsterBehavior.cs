@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Assets.HeroEditor.Common.ExampleScripts;
+using UnityEngine.UI;
 
 public class MonsterBehavior : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class MonsterBehavior : MonoBehaviour
 
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI levelText;
-
+    [SerializeField] Image HPimage;
     private Collider2D playerCollision = null;
     private IEnumerator attackCoroutine = null;
 
@@ -156,6 +157,9 @@ public class MonsterBehavior : MonoBehaviour
         if (health > damage)
         {
             health -= damage;
+            //ÑªÌõ¸Ä±ä
+            HPimage.fillAmount = health / maxHealth;
+
             healthText.text = "HP: " + health + " / " + maxHealth;
         }
         else if (currentMonsterStatus != MonsterStatus.Die)
