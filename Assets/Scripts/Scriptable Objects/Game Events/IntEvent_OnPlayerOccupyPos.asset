@@ -9,13 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7a9926f34f9164469143cb80fe40ca4, type: 3}
-  m_Name: ExpHighTesst
+  m_Script: {fileID: 11500000, guid: 39bb527223534a9419af333d85c817db, type: 3}
+  m_Name: IntEvent_OnPlayerOccupyPos
   m_EditorClassIdentifier: 
-  maxLevel: 2
-  levelChance: 3200000032000000
-  maxHealth: 0a0000000a000000
-  speed: 0.5
-  dropExp: 6400000064000000
-  attack: 5
-  attackSpeed: 5

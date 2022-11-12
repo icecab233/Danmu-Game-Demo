@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
             hpMax = PlayerData.hpMaxOfLevel[level];
             hp = hpMax;
             // »»¹­
-            character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[level]], HeroEditor.Common.Enums.EquipmentPart.Bow);
+            character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[level]], EquipmentPart.Bow);
             // FX
             levelUpFX.Play();
         }

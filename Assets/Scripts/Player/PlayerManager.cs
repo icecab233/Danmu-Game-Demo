@@ -1,7 +1,5 @@
 using UnityEngine;
-using Assets.HeroEditor.Common.CharacterScripts;
 using Assets.HeroEditor.Common.CommonScripts;
-using HeroEditor.Common.Enums;
 using System.Collections.Generic;
 
 /// <summary>
