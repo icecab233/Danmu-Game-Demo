@@ -6,6 +6,8 @@ using UnityEngine;
 public class LiveManager : MonoBehaviour
 {
     public PlayerManager playerManager;
+    public StringEvent AddNewPlayerEvent;
+    public StringEvent RandomPlayerEvent;
 
     public void OnDanmu(string userName, string danmu)
     {
