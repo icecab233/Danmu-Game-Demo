@@ -159,13 +159,13 @@ public class MonsterBehavior : MonoBehaviour
             health -= damage;
             //血条改变
             HPimage.fillAmount = health / maxHealth;
-
             healthText.text = "HP: " + health + " / " + maxHealth;
         }
         else if (currentMonsterStatus != MonsterStatus.Die)
         {
+            //血条归零
+            HPimage.fillAmount = 0;
             Die();
-
             //给玩家计算经验值
             player.addExp(monsterData.dropExp[level]);
         }
