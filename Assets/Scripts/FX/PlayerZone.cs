@@ -10,7 +10,7 @@ public class PlayerZone : MonoBehaviour
 
     void Update()
     {
-        if (PlayerManager.Instance.posOccupied[posId])
+/*        if (PlayerManager.Instance.posOccupied[posId])
         {
             playerZone1.SetActive(true);
             playerZone2.SetActive(false);
@@ -18,6 +18,20 @@ public class PlayerZone : MonoBehaviour
         {
             playerZone1.SetActive(false);
             playerZone2.SetActive(true);
-        }
+        }*/
+    }
+
+    public void SetZoneOccpuied(int _posId)
+    {
+        if (posId != _posId) return;
+        playerZone1.SetActive(true);
+        playerZone2.SetActive(false);
+    }
+
+    public void SetZoneFree(int _posId)
+    {
+        if (posId != _posId) return;
+        playerZone1.SetActive(false);
+        playerZone2.SetActive(true);
     }
 }

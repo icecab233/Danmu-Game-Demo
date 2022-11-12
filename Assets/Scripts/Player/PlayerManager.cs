@@ -32,6 +32,9 @@ public class PlayerManager : MonoBehaviour
 
     private int maxPlayerNum;
 
+    public IntEvent OnPlayerOccupyPosEvent;
+    public IntEvent OnPlayerFreePosEvent;
+
     private void Awake()
     {
         // Singleton
@@ -105,6 +108,8 @@ public class PlayerManager : MonoBehaviour
         posOccupied[posId] = true;
         playerNameSet.Add(name);
 
+        OnPlayerOccupyPosEvent.Raise(posId);
+
         player.changeName(name);
         player.transform.localPosition = new Vector3(0, 0, 0);
 
@@ -119,6 +124,7 @@ public class PlayerManager : MonoBehaviour
     {
         int oldPosId = playerPosMap[player];
         posOccupied[oldPosId] = false;
+        OnPlayerFreePosEvent.Raise(oldPosId);
         playerList.Remove(player);
         playerPosMap.Remove(player);
         playerNameSet.Remove(player.playerName);
