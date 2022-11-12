@@ -5705,6 +5705,7 @@ MonoBehaviour:
   HPBar: {fileID: 6043014710020812816}
   levelUpFX: {fileID: 3447562034396205120}
   rageFX: {fileID: 1135163843029399633}
+  PlayerDieEvent: {fileID: 11400000, guid: aaac0d57edc5bbe4d92fab2da920fdd4, type: 2}
 --- !u!114 &5028197871096466659
 MonoBehaviour:
   m_ObjectHideFlags: 0

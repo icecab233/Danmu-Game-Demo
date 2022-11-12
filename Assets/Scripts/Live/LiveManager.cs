@@ -1,62 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LiveManager : MonoBehaviour
 {
     public PlayerManager playerManager;
     public StringEvent AddNewPlayerEvent;
-    public StringEvent RandomPlayerEvent;
-    public VoidEvent RangeModeEvent233;
+    public StringEvent RandomizePlayerEvent;
+    public VoidEvent RageModeForAllEvent;
+    public StringEvent AddExpToPlayerFromGift1Event;
 
     public void OnDanmu(string userName, string danmu)
     {
         switch (danmu)
         {
             case "加入":
-                int log =playerManager.addNewPlayer(userName);
-                if (log < 0)
-                {
-                    Debug.Log("加入失败，代码" + log);
-                }
+                AddNewPlayerEvent.Raise(userName);
                 break;
             case "随机":
-                int id = playerManager.getIdByName(userName);
-                if (id == -1)
-                {
-                    Debug.Log("弹幕-随机：不存在用户");
-                }
-                else
-                {
-                    playerManager.randomPlayer(id);
-                }
+                RandomizePlayerEvent.Raise(userName);
                 break;
             case "狂暴":
-                playerManager.rageModeForAll(15f);
+                RageModeForAllEvent.Raise();
                 break;
         }
     }
 
     public void OnGift(string userName, string giftName, int giftNum)
     {
-        int id = playerManager.getIdByName(userName);
-        if (id == -1)
-        {
-            Debug.Log("接受礼物：不存在用户");
-            return;
-        }
-        Debug.Log("GIFTNAME: " + giftName);
 
         switch (giftName)
         {
             case "辣条":
                 if (giftNum == 1)
                 {
-                    playerManager.playerList[id].addExp(100);
+                    AddExpToPlayerFromGift1Event.Raise(userName);
                 } else if (giftNum == 2)
                 {
-                    playerManager.rageModeForAll(20f);
+                    RageModeForAllEvent.Raise();
                 }
                 break;
         }

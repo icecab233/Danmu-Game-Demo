@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        refreshBots();
+        RefreshBots();
     }
 
     void Update()
@@ -64,20 +64,20 @@ public class PlayerManager : MonoBehaviour
         // 仅供测试
         if (Input.GetKeyDown(KeyCode.A))
         {
-            addNewPlayer("BOT"+Random.Range(10,100));
+            AddNewPlayer("BOT"+Random.Range(10,100));
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            rageModeForAll(20.0f);
+            RageModeForAll(20.0f);
         }
     }
 
     // 添加新玩家
     // 添加成功，返回添加后总玩家个数
     // 添加失败，返回-1
-    public int addNewPlayer(string name)
+    public void AddNewPlayer(string name)
     {
-        if (playerList.Count == maxPlayerNum) return -1;
+        if (playerList.Count == maxPlayerNum) return;
 
         // 寻找没被占位的位置
         int posId = 0;
@@ -88,11 +88,11 @@ public class PlayerManager : MonoBehaviour
                 break;
             }
 
-        return addNewPlayer(name, posId);
+        AddNewPlayer(name, posId);
     }
 
     // 返回值：-1人数满，-2位置被占，-3玩家重复加入，否则返回当前玩家总数
-    public int addNewPlayer(string name, int posId)
+    public int AddNewPlayer(string name, int posId)
     {
         if (playerList.Count == maxPlayerNum) return -1;
         if (posOccupied[posId]) return -2;
@@ -116,11 +116,11 @@ public class PlayerManager : MonoBehaviour
         // Random
         player.Randomize();
 
-        refreshBots();
+        RefreshBots();
         return playerList.Count;
     }
 
-    public void playerDie(Player player)
+    public void PlayerDie(Player player)
     {
         int oldPosId = playerPosMap[player];
         posOccupied[oldPosId] = false;
@@ -129,14 +129,15 @@ public class PlayerManager : MonoBehaviour
         playerPosMap.Remove(player);
         playerNameSet.Remove(player.playerName);
 
-        refreshBots();
+        RefreshBots();
     }
 
-    public void randomPlayer(int id)
+    public void RandomizePlayer(string name)
     {
-        if (id >= playerList.Count)
+        int id = GetIdByName(name);
+        if (id >= playerList.Count || id < 0)
         {
-            Debug.Log("Random Player: ID out of index");
+            Debug.Log("Random Player: user " + name + " not exist");
             return;
         }
 
@@ -144,12 +145,12 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    // 供外部调用，输入名字输出id
-    public int getIdByName(string name)
+    //输入名字输出id
+    private int GetIdByName(string name)
     {
         for (int i = 0; i < playerList.Count; i++)
         {
-            if (playerList[i].name == name)
+            if (playerList[i].playerName == name)
                 return i;
         }
         return -1;
@@ -158,7 +159,7 @@ public class PlayerManager : MonoBehaviour
     // 更新bot的存在情况。当玩家变动时调用
     // 某一排有玩家时，关闭bot
     // 某一排没玩家时，开启bot
-    private void refreshBots()
+    private void RefreshBots()
     {
         for (int i = 0; i < lineCount; i++)
             if (posOccupied[i] || posOccupied[i + 5])
@@ -168,11 +169,17 @@ public class PlayerManager : MonoBehaviour
     }
 
     // 全员开启rage模式
-    public void rageModeForAll(float time)
+    public void RageModeForAll(float time)
     {
         foreach (var player in playerList)
         {
             player.StartRage(time);
         }
+    }
+
+    public void AddExpFromGift1(string name)
+    {
+        int id = GetIdByName(name);
+        playerList[id].addExp(100);
     }
 }

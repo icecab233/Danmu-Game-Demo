@@ -70,6 +70,8 @@ public class Player : MonoBehaviour
     public ParticleSystem levelUpFX;
     public ParticleSystem rageFX;
 
+    public PlayerEvent PlayerDieEvent;
+
     private float time;
 
     private void Awake()
@@ -210,9 +212,8 @@ public class Player : MonoBehaviour
     {
         character.Animator.SetBool("Ready", false);
         character.Animator.SetInteger("State", 6);
+        PlayerDieEvent.Raise(this);
         StartCoroutine(DieCoroutine());
-
-        PlayerManager.Instance.playerDie(this);
     }
 
     IEnumerator DieCoroutine()
