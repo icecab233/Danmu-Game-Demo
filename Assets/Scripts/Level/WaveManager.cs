@@ -15,6 +15,9 @@ public class WaveManager : MonoBehaviour
     public GameObject fullSreenPopUp;
     public Transform mainCanvas;
 
+    // 难度因数，由LevelManager外部进行更改，影响怪物刷新间隔时间
+    public float diffcultyFactor = 1.0f;
+
     public enum WaveStatus
     {
         Stop,
@@ -190,7 +193,9 @@ public class WaveManager : MonoBehaviour
             newMonster.transform.localScale = new Vector3(0.25f, 0.25f, 1);
             livingMonsters.Add(newMonster);
 
-            yield return new WaitForSeconds(Random.Range(levelData.waves[wave].spawnIntervalBase - levelData.waves[wave].spawnIntervalRandom, levelData.waves[wave].spawnIntervalBase + levelData.waves[wave].spawnIntervalRandom));
+            float interval = (1.0f / diffcultyFactor) * Random.Range(levelData.waves[wave].spawnIntervalBase - levelData.waves[wave].spawnIntervalRandom, levelData.waves[wave].spawnIntervalBase + levelData.waves[wave].spawnIntervalRandom);
+            Debug.Log("Diffculty Factor: " + diffcultyFactor + "   Monster Spawn Interval: " + interval);
+            yield return new WaitForSeconds(interval);
         }
     }
 }

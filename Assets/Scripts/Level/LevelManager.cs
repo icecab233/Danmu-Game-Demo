@@ -8,18 +8,6 @@ public class LevelManager : MonoBehaviour
     private static LevelManager _instance;
     public static LevelManager Instance { get { return _instance; } }
 
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-    }
-
     public LevelData levelData;
     public WaveManager waveManager;
 
@@ -34,12 +22,29 @@ public class LevelManager : MonoBehaviour
     public float preparingTime = 10.0f;
     public FullScreenPopUp popUpCountDown;
 
+    private const float refreshDiffcultyFactorIntervalTime = 5.0f;
     private float preparingStartTime;
+    private IntReference playerCPIntReference;
+
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+        playerCPIntReference = GetComponent<IntReference>();
+    }
 
     void Start()
     {
         // demo，无ui时
         StartLevel();
+
+        StartCoroutine(RefreshDiffcultyFactor());
     }
 
     void Update()
@@ -81,5 +86,27 @@ public class LevelManager : MonoBehaviour
         preparingStartTime = Time.time;
         popUpCountDown = Instantiate(fullScreenPopUp, mainCanvas).GetComponent<FullScreenPopUp>();
         popUpCountDown.dieTime = preparingTime;
+    }
+
+    // 定期向wavemaneger更新难度系数
+    IEnumerator RefreshDiffcultyFactor()
+    {
+        while (true)
+        {
+            float cp = playerCPIntReference.value;
+            float factor = 1.0f;
+            if (cp < 750)
+            {
+                factor = 0.5f;
+            } else if (cp < 1500)
+            {
+                factor = 1.0f;
+            } else
+            {
+                factor = 1.5f;
+            }
+            waveManager.diffcultyFactor = factor;
+            yield return new WaitForSeconds(refreshDiffcultyFactorIntervalTime);
+        }
     }
 }

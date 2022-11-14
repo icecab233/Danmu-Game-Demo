@@ -1,6 +1,7 @@
 using UnityEngine;
 using Assets.HeroEditor.Common.CommonScripts;
 using System.Collections.Generic;
+using System.Collections;
 
 /// <summary>
 /// TO DO:
@@ -29,11 +30,14 @@ public class PlayerManager : MonoBehaviour
 
     public Player[] bots;
     private const int lineCount = 5;
+    private const float updateTimeInterval = 5f;
 
     private int maxPlayerNum;
 
     public IntEvent OnPlayerOccupyPosEvent;
     public IntEvent OnPlayerFreePosEvent;
+
+    public IntVariable playerSumCP;
 
     private void Awake()
     {
@@ -56,6 +60,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(GetAllCPCoroutinue());
         RefreshBots();
     }
 
@@ -181,5 +186,26 @@ public class PlayerManager : MonoBehaviour
     {
         int id = GetIdByName(name);
         playerList[id].addExp(100);
+    }
+
+    // 每隔一定时间进行一次所有玩家CP计算
+    IEnumerator GetAllCPCoroutinue()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(updateTimeInterval);
+            playerSumCP.value = GetAllCP();
+        }
+    }
+
+    // 返回现存所有玩家的CP
+    private int GetAllCP()
+    {
+        int sum = 0;
+        foreach(Player player in playerList)
+        {
+            sum += player.GetCP();
+        }
+        return sum;
     }
 }

@@ -18,4 +18,8 @@ public static class PlayerData
 
     // 每个等级装备的弓的编号
     public static int[] bowIdOfLevel = { 7, 25, 0, 4, 3, 1};
+
+    // 弓拉弓时间，具体为AttackCoroutine中StartCharge和Endcharge之间的间隔
+    // 实际每次射箭间隔时间，假设等级为x，attackTimeOfLevel[x] + bowChargeTime
+    public static float bowChargeTime = 1.0f;
 }

@@ -143,6 +143,15 @@ public class Player : MonoBehaviour
         
     }
 
+    // 获取战力
+    // 战力计算方式：1分钟内平均输出伤害量
+    public int GetCP()
+    {
+        float attackInternalTime = PlayerData.bowChargeTime + attackTime;
+        float cp = 60.0f / attackInternalTime * attack;
+        return (int)cp;
+    }
+
     public void changeName(string _name)
     {
         playerName = _name;
