@@ -5,6 +5,7 @@ using Assets.HeroEditor.Common.CharacterScripts;
 using UnityEngine.UI;
 using Assets.HeroEditor.Common.CommonScripts;
 using HeroEditor.Common.Enums;
+using DanmuGame.events;
 
 public class Player : MonoBehaviour
 {

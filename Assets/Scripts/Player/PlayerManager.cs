@@ -2,6 +2,7 @@ using UnityEngine;
 using Assets.HeroEditor.Common.CommonScripts;
 using System.Collections.Generic;
 using System.Collections;
+using DanmuGame.events;
 
 /// <summary>
 /// TO DO:

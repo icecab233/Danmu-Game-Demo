@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -9,7 +8,6 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get { return _instance; } }
 
     public LevelData levelData;
-    public WaveManager waveManager;
 
     // prefabs to Instantiate
     public GameObject fullScreenPopUp;
@@ -30,7 +28,7 @@ public class LevelManager : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {
@@ -68,14 +66,23 @@ public class LevelManager : MonoBehaviour
     {
         GameObject popUpObject = Instantiate(fullScreenPopUp, mainCanvas);
         popUpObject.GetComponent<FullScreenPopUp>().showText = levelData.levelName + ConstantText.startLevel;
-        waveManager.InitWave();
+        WaveManager.Instance.InitWave();
     }
 
+    // 由外部调用
     public void GameFail()
     {
         GameObject popUpObject = Instantiate(fullScreenPopUp, mainCanvas);
         popUpObject.GetComponent<FullScreenPopUp>().showText = ConstantText.gameFail;
-        waveManager.StopWave();
+        WaveManager.Instance.StopWave();
+        StartCoroutine(RestartLevel());
+    }
+
+    // 由WaveManager单实例调用
+    public void GameSuccess()
+    {
+        GameObject popUpObject = Instantiate(fullScreenPopUp, mainCanvas);
+        popUpObject.GetComponent<FullScreenPopUp>().showText = ConstantText.gameSuccess;
         StartCoroutine(RestartLevel());
     }
 
@@ -93,19 +100,24 @@ public class LevelManager : MonoBehaviour
     {
         while (true)
         {
+            // 临时的难度划分机制，等待详细策划
             float cp = playerCPIntReference.value;
             float factor = 1.0f;
-            if (cp < 750)
+            if (cp < 375)
             {
                 factor = 0.5f;
-            } else if (cp < 1500)
+            } else if (cp < 750)
+            {
+                factor = 0.75f;
+            } else if (cp < 1000)
             {
                 factor = 1.0f;
-            } else
+            }
+            else
             {
                 factor = 1.5f;
             }
-            waveManager.diffcultyFactor = factor;
+            WaveManager.Instance.diffcultyFactor = factor;
             yield return new WaitForSeconds(refreshDiffcultyFactorIntervalTime);
         }
     }

@@ -1,4 +1,5 @@
 using Assets.FantasyMonsters.Scripts;
+using DanmuGame.events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,8 +34,10 @@ public class WaveManager : MonoBehaviour
     public float leftTime;
 
     public List<GameObject> livingMonsters;
+    public VoidEvent OnGameSuccessEvent;
 
     private IEnumerator coroutine = null;
+
 
     private void Awake()
     {
@@ -68,6 +71,7 @@ public class WaveManager : MonoBehaviour
         livingMonsters.Clear();
         waveNow = 0;
         coroutine = null;
+        StopAllCoroutines();
     }
 
     // 供外部调用，停止此关卡
@@ -169,8 +173,7 @@ public class WaveManager : MonoBehaviour
         if (waveNow + 1 == levelData.waveCount)
         {
             // GAME END...
-            Debug.Log("Game end - success");
-
+            OnGameSuccessEvent.Raise();
         }
         else
         {
@@ -194,7 +197,6 @@ public class WaveManager : MonoBehaviour
             livingMonsters.Add(newMonster);
 
             float interval = (1.0f / diffcultyFactor) * Random.Range(levelData.waves[wave].spawnIntervalBase - levelData.waves[wave].spawnIntervalRandom, levelData.waves[wave].spawnIntervalBase + levelData.waves[wave].spawnIntervalRandom);
-            Debug.Log("Diffculty Factor: " + diffcultyFactor + "   Monster Spawn Interval: " + interval);
             yield return new WaitForSeconds(interval);
         }
     }

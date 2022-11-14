@@ -14277,8 +14277,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1775849408274313426}
   - component: {fileID: 1775849408274313427}
-  - component: {fileID: 9047356699917489615}
-  - component: {fileID: -3665688679868836204}
+  - component: {fileID: 7516877331321114853}
+  - component: {fileID: 7656709821021954112}
   m_Layer: 0
   m_Name: PlayerZone
   m_TagString: Untagged
@@ -14318,7 +14318,7 @@ MonoBehaviour:
   playerZone1: {fileID: 389294355910620720}
   playerZone2: {fileID: 6739464738599882092}
   posId: 0
---- !u!114 &9047356699917489615
+--- !u!114 &7516877331321114853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14327,16 +14327,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775849408274313421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e6d3643b92bbe94eb8140c5d26e2b44, type: 3}
+  m_Script: {fileID: 11500000, guid: c43c7a7e4c2b7eb43aeeba6399e8ddf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 9ebe1540ee00bca4b83863cf1d0ae9ce, type: 2}
-  response:
+  gameEvent: {fileID: 11400000, guid: 639509c20bf554044baf1c8113d39c8f, type: 2}
+  unityEventResponse:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1775849408274313427}
         m_TargetAssemblyTypeName: PlayerZone, Assembly-CSharp
-        m_MethodName: SetZoneOccpuied
+        m_MethodName: SetZoneFree
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14346,7 +14346,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-3665688679868836204
+--- !u!114 &7656709821021954112
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14355,16 +14355,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775849408274313421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e6d3643b92bbe94eb8140c5d26e2b44, type: 3}
+  m_Script: {fileID: 11500000, guid: c43c7a7e4c2b7eb43aeeba6399e8ddf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 639509c20bf554044baf1c8113d39c8f, type: 2}
-  response:
+  gameEvent: {fileID: 11400000, guid: 9ebe1540ee00bca4b83863cf1d0ae9ce, type: 2}
+  unityEventResponse:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1775849408274313427}
         m_TargetAssemblyTypeName: PlayerZone, Assembly-CSharp
-        m_MethodName: SetZoneFree
+        m_MethodName: SetZoneOccpuied
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
