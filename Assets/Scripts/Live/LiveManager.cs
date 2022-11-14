@@ -1,4 +1,5 @@
 using UnityEngine;
+using DanmuGame.events;
 
 public class LiveManager : MonoBehaviour
 {
