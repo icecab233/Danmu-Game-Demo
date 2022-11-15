@@ -107,7 +107,7 @@ public class PlayerBow : MonoBehaviour
 
         arrow.transform.localPosition = Vector3.zero + increment;
         arrow.transform.localRotation = Quaternion.identity;
-        arrow.transform.SetParent(null);
+        arrow.transform.SetParent(transform);
         sr.sprite = character.Bow.Single(j => j.name == "Arrow");
         rb.velocity = speed * FireTransform.right * Mathf.Sign(character.transform.lossyScale.x) * 1f;
 

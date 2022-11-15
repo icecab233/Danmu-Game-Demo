@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     // 死亡后摧毁对象延后时间
     public float dieTime = 2.0f;
 
-    private int exp;
+    public int exp;
 
     [SerializeField]
     private TextMeshProUGUI nameText;
@@ -71,7 +71,8 @@ public class Player : MonoBehaviour
     public ParticleSystem levelUpFX;
     public ParticleSystem rageFX;
 
-    public PlayerEvent PlayerDieEvent;
+    public PlayerEvent OnPlayerDieEvent;
+    public PlayerEvent OnPlayerLevelUpEvent;
 
     private float time;
 
@@ -183,6 +184,8 @@ public class Player : MonoBehaviour
             character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[level]], EquipmentPart.Bow);
             // FX
             levelUpFX.Play();
+
+            OnPlayerLevelUpEvent.Raise(this);
         }
 
         displayText();
@@ -222,7 +225,7 @@ public class Player : MonoBehaviour
     {
         character.Animator.SetBool("Ready", false);
         character.Animator.SetInteger("State", 6);
-        PlayerDieEvent.Raise(this);
+        OnPlayerDieEvent.Raise(this);
         StartCoroutine(DieCoroutine());
     }
 

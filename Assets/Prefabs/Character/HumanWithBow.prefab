@@ -5697,6 +5697,7 @@ MonoBehaviour:
   attackSpeed: 0
   attackTime: 0
   dieTime: 2
+  exp: 0
   nameText: {fileID: 1638699958974825116}
   levelText: {fileID: 324166298363620332}
   EXPBar: {fileID: 7895015588111772016}
@@ -5705,7 +5706,8 @@ MonoBehaviour:
   HPBar: {fileID: 6043014710020812816}
   levelUpFX: {fileID: 3447562034396205120}
   rageFX: {fileID: 1135163843029399633}
-  PlayerDieEvent: {fileID: 11400000, guid: aaac0d57edc5bbe4d92fab2da920fdd4, type: 2}
+  OnPlayerDieEvent: {fileID: 11400000, guid: aaac0d57edc5bbe4d92fab2da920fdd4, type: 2}
+  OnPlayerLevelUpEvent: {fileID: 11400000, guid: c68fcc46f2ec1334c814681e35cdfc68, type: 2}
 --- !u!114 &5028197871096466659
 MonoBehaviour:
   m_ObjectHideFlags: 0
