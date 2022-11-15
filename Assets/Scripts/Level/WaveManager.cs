@@ -15,7 +15,7 @@ public class WaveManager : MonoBehaviour
 
     public GameObject fullSreenPopUp;
     public Transform mainCanvas;
-
+    
     // 难度因数，由LevelManager外部进行更改，影响怪物刷新间隔时间
     public float diffcultyFactor = 1.0f;
 
@@ -34,8 +34,8 @@ public class WaveManager : MonoBehaviour
     public float leftTime;
 
     public List<GameObject> livingMonsters;
-    public VoidEvent OnGameSuccessEvent;
-
+    public VoidEvent OnGameSuccessEvent;   
+    public IntEvent nextWaveEvent;
     private IEnumerator coroutine = null;
 
 
@@ -157,8 +157,10 @@ public class WaveManager : MonoBehaviour
         coroutine = SpawnMonsterCoroutine(waveNow);
         StartCoroutine(coroutine);
 
-        GameObject gameObject =  Instantiate(fullSreenPopUp, mainCanvas);
-        gameObject.GetComponent<FullScreenPopUp>().showText = ConstantText.nextWaveComing;
+        nextWaveEvent.Raise(waveNow);
+        // GameObject gameObject =  Instantiate(fullSreenPopUp, mainCanvas);
+        // gameObject.GetComponent<FullScreenPopUp>().showText = ConstantText.nextWaveComing;
+
     }
 
     private void GoodToStartWaiting()
