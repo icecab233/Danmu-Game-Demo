@@ -728,6 +728,7 @@ MonoBehaviour:
   attackSpeed: 0
   attackTime: 0
   dieTime: 2
+  exp: 0
   nameText: {fileID: 0}
   levelText: {fileID: 0}
   EXPBar: {fileID: 0}
