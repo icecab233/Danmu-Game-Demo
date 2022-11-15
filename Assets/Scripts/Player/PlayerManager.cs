@@ -30,7 +30,8 @@ public class PlayerManager : MonoBehaviour
     public HashSet<string> playerNameSet;
 
     public Player[] bots;
-    private const int lineCount = 5;
+    [SerializeField]
+    private int lineCount;
     private const float updateTimeInterval = 5f;
 
     private int maxPlayerNum;
@@ -168,7 +169,7 @@ public class PlayerManager : MonoBehaviour
     private void RefreshBots()
     {
         for (int i = 0; i < lineCount; i++)
-            if (posOccupied[i] || posOccupied[i + 5])
+            if (posOccupied[i] || posOccupied[i + lineCount])
                 bots[i].SetActive(false);
             else
                 bots[i].SetActive(true);

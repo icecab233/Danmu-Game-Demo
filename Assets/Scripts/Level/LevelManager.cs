@@ -103,13 +103,13 @@ public class LevelManager : MonoBehaviour
             // 临时的难度划分机制，等待详细策划
             float cp = playerCPIntReference.value;
             float factor = 1.0f;
-            if (cp < 375)
+            if (cp < 310)
             {
                 factor = 0.5f;
-            } else if (cp < 750)
+            } else if (cp < 610)
             {
                 factor = 0.75f;
-            } else if (cp < 1000)
+            } else if (cp < 1010)
             {
                 factor = 1.0f;
             }
