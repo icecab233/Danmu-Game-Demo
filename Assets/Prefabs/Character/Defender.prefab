@@ -731,10 +731,12 @@ MonoBehaviour:
   exp: 0
   nameText: {fileID: 0}
   levelText: {fileID: 0}
-  EXPBar: {fileID: 0}
   atkText: {fileID: 0}
   asText: {fileID: 0}
-  HPBar: {fileID: 0}
+  HPSlider: {fileID: 0}
+  EXPSlider: {fileID: 0}
+  levelFlags: []
+  levelFlagImage: {fileID: 0}
   levelUpFX: {fileID: 0}
   rageFX: {fileID: 0}
   OnPlayerDieEvent: {fileID: 0}

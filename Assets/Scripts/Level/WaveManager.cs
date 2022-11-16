@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
     public GameObject fullSreenPopUp;
     public Transform mainCanvas;
     
-    // ÄÑ¶ÈÒòÊı£¬ÓÉLevelManagerÍâ²¿½øĞĞ¸ü¸Ä£¬Ó°Ïì¹ÖÎïË¢ĞÂ¼ä¸ôÊ±¼ä
+    // éš¾åº¦å› æ•°ï¼Œç”±LevelManagerå¤–éƒ¨è¿›è¡Œæ›´æ”¹ï¼Œå½±å“æ€ªç‰©åˆ·æ–°é—´éš”æ—¶é—´
     public float diffcultyFactor = 1.0f;
 
     public enum WaveStatus
@@ -30,7 +30,7 @@ public class WaveManager : MonoBehaviour
 
     private float waveStartTime;
     public int waveNow = 0;
-    // ×¼±¸»òÕ½¶·Ê£ÓàµÄÊ±¼ä£¬ÒÔ¹©·ÃÎÊ
+    // å‡†å¤‡æˆ–æˆ˜æ–—å‰©ä½™çš„æ—¶é—´ï¼Œä»¥ä¾›è®¿é—®
     public float leftTime;
 
     public List<GameObject> livingMonsters;
@@ -61,20 +61,20 @@ public class WaveManager : MonoBehaviour
         CalculateWaveProcess();
     }
 
-    // ¹©Íâ²¿µ÷ÓÃ£¬ÖØĞÂ¿ªÊ¼´Ë¹Ø¿¨
+    // ä¾›å¤–éƒ¨è°ƒç”¨ï¼Œé‡æ–°å¼€å§‹æ­¤å…³å¡
     public void InitWave()
     {
         waveStartTime = Time.time;
         currentWaveStatus = WaveStatus.Preparing;
 
-        // ÖØÖÃ±äÁ¿
+        // é‡ç½®å˜é‡
         livingMonsters.Clear();
         waveNow = 0;
         coroutine = null;
         StopAllCoroutines();
     }
 
-    // ¹©Íâ²¿µ÷ÓÃ£¬Í£Ö¹´Ë¹Ø¿¨
+    // ä¾›å¤–éƒ¨è°ƒç”¨ï¼Œåœæ­¢æ­¤å…³å¡
     public void StopWave()
     {
         currentWaveStatus = WaveStatus.Stop;
@@ -85,24 +85,24 @@ public class WaveManager : MonoBehaviour
         if (coroutine != null) StopCoroutine(coroutine);
     }
 
-    // ¼ÆËãµ±Ç°µÄ×´Ì¬£¬ÄÄÒ»²¨£¬ÊÇ×¼±¸Ê±¼ä»¹ÊÇÕ½¶·Ê±¼ä
+    // è®¡ç®—å½“å‰çš„çŠ¶æ€ï¼Œå“ªä¸€æ³¢ï¼Œæ˜¯å‡†å¤‡æ—¶é—´è¿˜æ˜¯æˆ˜æ–—æ—¶é—´
     private void CalculateWaveProcess()
     {
         float timePassed = Time.time - waveStartTime;
 
         /*
-            ¿ÉÄÜ´æÔÚµÄÈıÖÖ×´Ì¬±ä»¯
-            1. µ±Ç°Îª×¼±¸×´Ì¬£¬Ê±¼ä³¬¹ı×¼±¸Ê±¼ä£¬¿ªÊ¼Õ½¶·Ë¢¹Ö£¬Éú³ÉµĞÈË
-            2. µ±Ç°ÎªÕ½¶·×´Ì¬£¬Ê±¼ä³¬¹ıÕ½¶·Ë¢¹ÖÊ±¼ä
-                (1). Õ½³¡»¹ÓĞ²ĞÓà¹ÖÎï£¬½øÈëµÈ´ı×´Ì¬£¬Í£Ö¹Ë¢¹Ö
-                (2). Õ½³¡ÎŞ¹ÖÎï£¬½øÈëÏÂÒ»²¨×¼±¸×´Ì¬
-            3. µ±Ç°ÎªµÈ´ı×´Ì¬£¬Õ½³¡ÎŞ¹Ö£¬½øÈëÏÂÒ»²¨µÄ×¼±¸×´Ì¬
+            å¯èƒ½å­˜åœ¨çš„ä¸‰ç§çŠ¶æ€å˜åŒ–
+            1. å½“å‰ä¸ºå‡†å¤‡çŠ¶æ€ï¼Œæ—¶é—´è¶…è¿‡å‡†å¤‡æ—¶é—´ï¼Œå¼€å§‹æˆ˜æ–—åˆ·æ€ªï¼Œç”Ÿæˆæ•Œäºº
+            2. å½“å‰ä¸ºæˆ˜æ–—çŠ¶æ€ï¼Œæ—¶é—´è¶…è¿‡æˆ˜æ–—åˆ·æ€ªæ—¶é—´
+                (1). æˆ˜åœºè¿˜æœ‰æ®‹ä½™æ€ªç‰©ï¼Œè¿›å…¥ç­‰å¾…çŠ¶æ€ï¼Œåœæ­¢åˆ·æ€ª
+                (2). æˆ˜åœºæ— æ€ªç‰©ï¼Œè¿›å…¥ä¸‹ä¸€æ³¢å‡†å¤‡çŠ¶æ€
+            3. å½“å‰ä¸ºç­‰å¾…çŠ¶æ€ï¼Œæˆ˜åœºæ— æ€ªï¼Œè¿›å…¥ä¸‹ä¸€æ³¢çš„å‡†å¤‡çŠ¶æ€
         */
 
         switch(currentWaveStatus)
         {
             case WaveStatus.Preparing:
-                // ×´Ì¬±ä»¯1
+                // çŠ¶æ€å˜åŒ–1
                 if (timePassed >= levelData.wavePrepareTime[waveNow])
                 {
                     GoodToStartBattle();
@@ -110,15 +110,15 @@ public class WaveManager : MonoBehaviour
                 break;
 
             case WaveStatus.Battle:
-                // ×´Ì¬±ä»¯2µÄÌõ¼ş
+                // çŠ¶æ€å˜åŒ–2çš„æ¡ä»¶
                 if (timePassed >= levelData.waveTime[waveNow] + levelData.wavePrepareTime[waveNow])
                 {
-                    // ×´Ì¬±ä»¯2.1
+                    // çŠ¶æ€å˜åŒ–2.1
                     if (livingMonsters.Count > 0)
                     {
                         GoodToStartWaiting();
                     } else
-                    // ×´Ì¬±ä»¯2.2
+                    // çŠ¶æ€å˜åŒ–2.2
                     {
                         GoodToNextWave();
                     }
@@ -126,7 +126,7 @@ public class WaveManager : MonoBehaviour
                 break;
 
             case WaveStatus.Waiting:
-                // ×´Ì¬±ä»¯3
+                // çŠ¶æ€å˜åŒ–3
                 if (livingMonsters.Count == 0)
                 {
                     GoodToNextWave();
@@ -134,7 +134,7 @@ public class WaveManager : MonoBehaviour
                 break;
         }
 
-        // ¼ÆËãµ±Ç°×´Ì¬µÄÊ£ÓàÊ±¼ä
+        // è®¡ç®—å½“å‰çŠ¶æ€çš„å‰©ä½™æ—¶é—´
         switch(currentWaveStatus)
         {
             case WaveStatus.Preparing:
@@ -153,13 +153,12 @@ public class WaveManager : MonoBehaviour
     {
         currentWaveStatus = WaveStatus.Battle;
 
-        // ¿ªÊ¼ĞÂµÄÒ»²¨coroutine
+        // å¼€å§‹æ–°çš„ä¸€æ³¢coroutine
         coroutine = SpawnMonsterCoroutine(waveNow);
         StartCoroutine(coroutine);
 
         nextWaveEvent.Raise(waveNow);
-        // GameObject gameObject =  Instantiate(fullSreenPopUp, mainCanvas);
-        // gameObject.GetComponent<FullScreenPopUp>().showText = ConstantText.nextWaveComing;
+
 
     }
 

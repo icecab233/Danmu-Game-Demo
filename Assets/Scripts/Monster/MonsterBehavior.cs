@@ -14,7 +14,7 @@ public class MonsterBehavior : MonoBehaviour
     public float maxHealth;
     public float walkSpeed;
     public int level;
-
+    //public Slider HPSlider;
     private Monster monster;
 
     /// <summary>
@@ -158,6 +158,7 @@ public class MonsterBehavior : MonoBehaviour
         {
             health -= damage;
             //血条改变
+            //HPSlider.value=health / maxHealth;
             HPimage.fillAmount = health / maxHealth;
             healthText.text = "HP: " + health + " / " + maxHealth;
         }
@@ -165,6 +166,7 @@ public class MonsterBehavior : MonoBehaviour
         {
             //血条归零
             HPimage.fillAmount = 0;
+            //HPSlider.value=0;
             Die();
             //给玩家计算经验值
             player.addExp(monsterData.dropExp[level]);

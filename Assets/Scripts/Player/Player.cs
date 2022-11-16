@@ -56,15 +56,15 @@ public class Player : MonoBehaviour
     private TextMeshProUGUI nameText;
     [SerializeField]
     private TextMeshProUGUI levelText;
-    [SerializeField]
-    private Image EXPBar;
+
     [SerializeField]
     private TextMeshProUGUI atkText;
     [SerializeField]
     private TextMeshProUGUI asText;
-    [SerializeField]
-    private Image HPBar;
-
+    [SerializeField] Slider HPSlider;
+    [SerializeField] Slider EXPSlider;
+    [SerializeField] Sprite[] levelFlags;
+    [SerializeField] Image levelFlagImage;
     private PlayerBow playerBow;
     private Character character;
 
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
     public PlayerEvent OnPlayerLevelUpEvent;
 
     private float time;
-
+    
     private void Awake()
     {
         character = GetComponent<Character>();
@@ -239,19 +239,20 @@ public class Player : MonoBehaviour
     private void displayText()
     {
         // level
-        levelText.text = "LV. " + level;
+        levelText.text = level.ToString();
+        levelFlagImage.sprite=levelFlags[level];
 
         // 根据百分比，编辑exptext，显示升级进度
         if (level == PlayerData.maxLevel)
         {
-            EXPBar.fillAmount = 1.0f;
+            EXPSlider.value = 1.0f;
             return;
         } else
         {
             int denominator = PlayerData.expOfLevel[level + 1] - PlayerData.expOfLevel[level];
             int numerator = exp - PlayerData.expOfLevel[level];
             float percent = (numerator * 1.0f) / (denominator * 1.0f);
-            EXPBar.fillAmount = percent;
+            EXPSlider.value=percent;
         }
 
         // 攻击力和攻速
@@ -259,7 +260,7 @@ public class Player : MonoBehaviour
         asText.text = "AS\n" + attackSpeed;
 
         // 生命值
-        HPBar.fillAmount = hp * 1.0f / hpMax;
+        HPSlider.value = hp * 1.0f / hpMax;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
