@@ -17,11 +17,11 @@ MonoBehaviour:
   difficulty: 2
   waveCount: 5
   waves:
-  - {fileID: 11400000, guid: b1909dd977671874d9691683fb24fc8c, type: 2}
-  - {fileID: 11400000, guid: 8fb5867b63704894cbfd430bbaa3eaac, type: 2}
-  - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
-  - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
-  - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
+  - {fileID: 11400000, guid: 40eed9e4bc31eac46af15bf6e50ec048, type: 2}
+  - {fileID: 11400000, guid: 40eed9e4bc31eac46af15bf6e50ec048, type: 2}
+  - {fileID: 11400000, guid: 40eed9e4bc31eac46af15bf6e50ec048, type: 2}
+  - {fileID: 11400000, guid: 40eed9e4bc31eac46af15bf6e50ec048, type: 2}
+  - {fileID: 11400000, guid: 40eed9e4bc31eac46af15bf6e50ec048, type: 2}
   waveTime:
   - 60
   - 120

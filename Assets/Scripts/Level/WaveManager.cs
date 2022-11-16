@@ -64,6 +64,7 @@ public class WaveManager : MonoBehaviour
     // 供外部调用，重新开始此关卡
     public void InitWave()
     {
+        StopWave();
         waveStartTime = Time.time;
         currentWaveStatus = WaveStatus.Preparing;
 
