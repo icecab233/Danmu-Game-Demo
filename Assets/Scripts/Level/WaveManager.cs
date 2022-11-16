@@ -159,7 +159,6 @@ public class WaveManager : MonoBehaviour
 
         nextWaveEvent.Raise(waveNow);
 
-
     }
 
     private void GoodToStartWaiting()
@@ -171,10 +170,14 @@ public class WaveManager : MonoBehaviour
 
     private void GoodToNextWave()
     {
+        // 游戏成功后设置为-1，防止多次调用事件
+        if (waveNow == -1) return;
+
         if (waveNow + 1 == levelData.waveCount)
         {
             // GAME END...
             OnGameSuccessEvent.Raise();
+            waveNow = -1;
         }
         else
         {

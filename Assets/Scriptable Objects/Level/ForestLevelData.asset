@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ForestLevelData
   m_EditorClassIdentifier: 
   levelName: Forest
-  levelBackground: {fileID: 21300000, guid: 0096b0e0342e4f941b44fcdb98805d16, type: 3}
+  levelBackground: {fileID: 21300000, guid: 6b03444660d66214faa1aacce3d053d9, type: 3}
   difficulty: 1
   waveCount: 3
   waves:
@@ -23,8 +23,8 @@ MonoBehaviour:
   waveTime:
   - 60
   - 120
-  - 500
+  - 120
   wavePrepareTime:
   - 10
-  - 20
-  - 20
+  - 15
+  - 15

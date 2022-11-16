@@ -13,18 +13,24 @@ MonoBehaviour:
   m_Name: DesertLevelData
   m_EditorClassIdentifier: 
   levelName: Forest
-  levelBackground: {fileID: 21300000, guid: 0096b0e0342e4f941b44fcdb98805d16, type: 3}
-  difficulty: 1
-  waveCount: 3
+  levelBackground: {fileID: 21300000, guid: 3395f589644cf104e9b25ffe4ada0f44, type: 3}
+  difficulty: 2
+  waveCount: 5
   waves:
   - {fileID: 11400000, guid: b1909dd977671874d9691683fb24fc8c, type: 2}
   - {fileID: 11400000, guid: 8fb5867b63704894cbfd430bbaa3eaac, type: 2}
+  - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
+  - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
   - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
   waveTime:
   - 60
   - 120
   - 500
+  - 500
+  - 500
   wavePrepareTime:
   - 10
+  - 20
+  - 20
   - 20
   - 20

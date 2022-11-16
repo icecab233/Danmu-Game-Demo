@@ -10,21 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 006f09b53bf7d9c4cab81b33513c15d9, type: 3}
-  m_Name: ForestLevelData 1
+  m_Name: CrystalCaveLevelData
   m_EditorClassIdentifier: 
   levelName: Forest
-  levelBackground: {fileID: 21300000, guid: 0096b0e0342e4f941b44fcdb98805d16, type: 3}
-  difficulty: 1
-  waveCount: 3
+  levelBackground: {fileID: 21300000, guid: 05289389f49a3464f9fc1d741614026d, type: 3}
+  difficulty: 3
+  waveCount: 7
   waves:
   - {fileID: 11400000, guid: b1909dd977671874d9691683fb24fc8c, type: 2}
   - {fileID: 11400000, guid: 8fb5867b63704894cbfd430bbaa3eaac, type: 2}
+  - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
+  - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
+  - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
+  - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
   - {fileID: 11400000, guid: 925be11abce30c644834f543ae8ab29b, type: 2}
   waveTime:
   - 60
   - 120
   - 500
+  - 500
+  - 500
+  - 500
+  - 500
   wavePrepareTime:
   - 10
+  - 20
+  - 20
+  - 20
+  - 20
   - 20
   - 20

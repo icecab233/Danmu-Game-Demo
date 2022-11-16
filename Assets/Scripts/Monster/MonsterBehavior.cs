@@ -38,7 +38,6 @@ public class MonsterBehavior : MonoBehaviour
 
     public MonsterStatus currentMonsterStatus;
 
-    public TextMeshProUGUI healthText;
     public TextMeshProUGUI levelText;
     [SerializeField] Image HPimage;
     private Collider2D playerCollision = null;
@@ -54,7 +53,6 @@ public class MonsterBehavior : MonoBehaviour
         currentMonsterStatus = MonsterStatus.Walk;
 
         // set default text
-        healthText.text = "HP: " + health + " / " + maxHealth;
         levelText.text = "LV. " + (level+1);
     }
 
@@ -158,9 +156,7 @@ public class MonsterBehavior : MonoBehaviour
         {
             health -= damage;
             //ÑªÌõ¸Ä±ä
-            //HPSlider.value=health / maxHealth;
             HPimage.fillAmount = health / maxHealth;
-            healthText.text = "HP: " + health + " / " + maxHealth;
         }
         else if (currentMonsterStatus != MonsterStatus.Die)
         {
