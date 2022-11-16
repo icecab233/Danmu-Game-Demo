@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: CrystalCaveWave1
   m_EditorClassIdentifier: 
   monsters:
-  - {fileID: 8924111716705014194, guid: ed22fcfd47c9fb8419b812655e5b3ce5, type: 3}
-  spawnProbability: 64000000
-  spawnIntervalBase: 1
-  spawnIntervalRandom: 0.5
+  - {fileID: 6066720587822309444, guid: dbf5b2e9f4c17a84eae9ad7d8d392673, type: 3}
+  - {fileID: 4161149668831905439, guid: ee219f6686eb8e14381a3b9a813ad681, type: 3}
+  - {fileID: 7204021038470510452, guid: 3d1925a65191eb443b5bba0dee49b60e, type: 3}
+  - {fileID: 3480174543085926218, guid: de9fd78d95ca91c4c857934964700d76, type: 3}
+  - {fileID: 2933362408440677111, guid: 64982bdd0ad73d247a2338787d967a2d, type: 3}
+  spawnProbability: 1900000019000000190000001900000019000000
+  spawnIntervalBase: 2
+  spawnIntervalRandom: 1

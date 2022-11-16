@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: DesertWave1
   m_EditorClassIdentifier: 
   monsters:
-  - {fileID: 4549524449068006025, guid: eb06b7b0db9e24b428b89e18514059e1, type: 3}
-  spawnProbability: 64000000
-  spawnIntervalBase: 1
-  spawnIntervalRandom: 0.5
+  - {fileID: 7459246519036438895, guid: 734a202570fe37845aec8aa0a60e72fe, type: 3}
+  - {fileID: 6608967488402726301, guid: 2c13d7b1e7dbd5f468a22d0195397310, type: 3}
+  - {fileID: 4113662546752454343, guid: b05c0fa9acb8464488a1d082b55acb6f, type: 3}
+  - {fileID: 8202593267131746291, guid: 7dcc8182c607f164eb8ea590ec60bb75, type: 3}
+  - {fileID: 4567090041716489907, guid: 0a6d35f224159c440b489efc02173363, type: 3}
+  spawnProbability: 1900000019000000190000001900000019000000
+  spawnIntervalBase: 4
+  spawnIntervalRandom: 2

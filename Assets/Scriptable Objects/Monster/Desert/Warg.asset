@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a9926f34f9164469143cb80fe40ca4, type: 3}
+  m_Name: Warg
+  m_EditorClassIdentifier: 
+  maxLevel: 3
+  levelChance: 320000001e00000014000000
+  maxHealth: 320000004600000064000000
+  speed: 0.3
+  dropExp: 090000000c0000000f000000
+  attack: 10
+  attackSpeed: 5
