@@ -230,7 +230,7 @@ MonoBehaviour:
   level: 0
   currentMonsterStatus: 0
   levelText: {fileID: 2901644891588903994}
-  HPimage: {fileID: 6570496520477190778}
+  HPSlider: {fileID: 2353545692072315538}
 --- !u!50 &4048441411702877666
 Rigidbody2D:
   serializedVersion: 4
@@ -1066,6 +1066,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2778432643076710999, guid: 9bc6fe17e57c7964f92d886467eeb175, type: 3}
   m_PrefabInstance: {fileID: 3945219877508509897}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2353545692072315538 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1614898654691949147, guid: 9bc6fe17e57c7964f92d886467eeb175, type: 3}
+  m_PrefabInstance: {fileID: 3945219877508509897}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2901644891588903994 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2199034476905870579, guid: 9bc6fe17e57c7964f92d886467eeb175, type: 3}
@@ -1075,16 +1086,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6570496520477190778 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7921597920406657715, guid: 9bc6fe17e57c7964f92d886467eeb175, type: 3}
-  m_PrefabInstance: {fileID: 3945219877508509897}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

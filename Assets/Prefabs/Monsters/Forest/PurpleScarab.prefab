@@ -483,7 +483,7 @@ MonoBehaviour:
   level: 0
   currentMonsterStatus: 0
   levelText: {fileID: 6544122645873430123}
-  HPimage: {fileID: 3006933120896229419}
+  HPSlider: {fileID: 5925799425112064195}
 --- !u!50 &1927196820740110587
 Rigidbody2D:
   serializedVersion: 4
@@ -1147,15 +1147,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bc6fe17e57c7964f92d886467eeb175, type: 3}
---- !u!114 &3006933120896229419 stripped
+--- !u!114 &5925799425112064195 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7921597920406657715, guid: 9bc6fe17e57c7964f92d886467eeb175, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1614898654691949147, guid: 9bc6fe17e57c7964f92d886467eeb175, type: 3}
   m_PrefabInstance: {fileID: 4924104462381857432}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6544122645873430123 stripped

@@ -39,7 +39,8 @@ public class MonsterBehavior : MonoBehaviour
     public MonsterStatus currentMonsterStatus;
 
     public TextMeshProUGUI levelText;
-    [SerializeField] Image HPimage;
+    //[SerializeField] Image HPimage;
+    [SerializeField] Slider HPSlider;
     private Collider2D playerCollision = null;
     private IEnumerator attackCoroutine = null;
 
@@ -156,13 +157,14 @@ public class MonsterBehavior : MonoBehaviour
         {
             health -= damage;
             //血条改变
-            HPimage.fillAmount = health / maxHealth;
+            //HPimage.fillAmount = health / maxHealth;
+            HPSlider.value=health / maxHealth;
         }
         else if (currentMonsterStatus != MonsterStatus.Die)
         {
             //血条归零
-            HPimage.fillAmount = 0;
-            //HPSlider.value=0;
+            //HPimage.fillAmount = 0;
+            HPSlider.value=0;
             Die();
             //给玩家计算经验值
             player.addExp(monsterData.dropExp[level]);
