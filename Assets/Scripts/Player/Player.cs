@@ -14,12 +14,14 @@ public class Player : MonoBehaviour
     ///     1. archer：使用PlayerBow类进行弓箭射击
     ///     2. warrior: 使用XXX类进行近战攻击
     ///     3. defender：只防御，不进行攻击
+    ///     4. wizard: 使用PlayerMage进行魔法弹射击
     /// </summary>
     public enum PlayerType
     {
         archer,
         warrior,
-        defender
+        defender,
+        wizard
     }
     public PlayerType playerType;
 
@@ -45,7 +47,7 @@ public class Player : MonoBehaviour
     public int attack;
     // speed为显示数值，time为实际间隔
     public int attackSpeed;
-    public float attackTime;
+    public float attackTime = 2.0f;
 
     // 死亡后摧毁对象延后时间
     public float dieTime = 2.0f;
@@ -57,15 +59,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI levelText;
 
-    [SerializeField]
-    private TextMeshProUGUI atkText;
-    [SerializeField]
-    private TextMeshProUGUI asText;
     [SerializeField] Slider HPSlider;
     [SerializeField] Slider EXPSlider;
     [SerializeField] Sprite[] levelFlags;
     [SerializeField] Image levelFlagImage;
     private PlayerBow playerBow;
+    private PlayerMage playerMage;
     private Character character;
 
     public ParticleSystem levelUpFX;
@@ -106,6 +105,14 @@ public class Player : MonoBehaviour
                 }
                 break;
 
+            case PlayerType.wizard:
+                // 在一定时间间隔内自动攻击
+                if (Time.time - time >= attackTime)
+                {
+                    time = Time.time;
+                    playerMage.Attack();
+                }
+                break;
         }
     }
 
@@ -139,6 +146,9 @@ public class Player : MonoBehaviour
                 attack = 0;
                 attackSpeed = 0;
                 attackTime = 0f;
+                break;
+            case PlayerType.wizard:
+                playerMage = GetComponent<PlayerMage>();
                 break;
         }
 
@@ -254,10 +264,6 @@ public class Player : MonoBehaviour
             float percent = (numerator * 1.0f) / (denominator * 1.0f);
             EXPSlider.value=percent;
         }
-
-        // 攻击力和攻速
-        atkText.text = "ATK\n" + attack;
-        asText.text = "AS\n" + attackSpeed;
 
         // 生命值
         HPSlider.value = hp * 1.0f / hpMax;
