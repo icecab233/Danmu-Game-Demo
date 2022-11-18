@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6579548940145067243}
-  - component: {fileID: 6245127433050389272}
   - component: {fileID: 6461871063009513107}
   - component: {fileID: 6520365759775351797}
   - component: {fileID: 1567204741474992199}
   - component: {fileID: 4537958729308370583}
+  - component: {fileID: 5761163095976017103}
   m_Layer: 6
   m_Name: Arrow2D
   m_TagString: Untagged
@@ -38,22 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6245127433050389272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582488765932189409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76ccac6476cce8f4e8b495c740ef255c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Renderers: []
-  Trail: {fileID: 6583135694365438757}
-  Impact: {fileID: 6583042205496501757}
-  Rigidbody: {fileID: 4537958729308370583}
 --- !u!212 &6461871063009513107
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -249,6 +233,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5761163095976017103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582488765932189409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36203f73d8de12f4ebd254823fc56b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  damage: 1
 --- !u!1 &6583042205496501757
 GameObject:
   m_ObjectHideFlags: 0

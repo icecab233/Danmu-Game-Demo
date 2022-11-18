@@ -23,9 +23,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 40eed9e4bc31eac46af15bf6e50ec048, type: 2}
   - {fileID: 11400000, guid: 40eed9e4bc31eac46af15bf6e50ec048, type: 2}
   waveTime:
-  - 60
   - 120
-  - 500
+  - 240
+  - 360
   - 500
   - 500
   wavePrepareTime:
