@@ -22939,7 +22939,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.24893904, y: 0.5156596}
@@ -23028,8 +23028,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FireTransform: {fileID: 8078612603078129409}
-  ProjectilePrefab: {fileID: 0}
-  speed: 30
+  ProjectilePrefab: {fileID: 3508422720597427636, guid: 5d1a709e9fe4fa04a9327112457b500f, type: 3}
+  speed: 10
   missleDelay: 0.32
 --- !u!1 &3465786712817803873
 GameObject:
@@ -37818,7 +37818,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5337100697160303547}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -62133,7 +62133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7640895705302111200}
   m_LocalRotation: {x: -0.13052624, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
