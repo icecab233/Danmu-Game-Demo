@@ -1,28 +1,25 @@
-﻿using System.Linq;
-using System;
-using Assets.HeroEditor.Common.CharacterScripts;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMage : MonoBehaviour
+public class PlayerMage : PlayerWeaponBase
 {
-    private Character character;
-    public Transform FireTransform;
-    public GameObject MegaPrefab;
-    public float speed = 30f;
     public float missleDelay = 0.3f;
 
-    private void Start()
+    private new void Start()
     {
-        character = GetComponent<Character>();
-        character.GetReady();
+        base.Start();
         character.Animator.SetInteger("WeaponType", 0);
     }
 
-    // 创造一个默认的拉弓射箭行为
-    public void Attack()
+    public override void Attack()
     {
         StartCoroutine(AttackCoroutine());
+    }
+
+    public override void DoubleAttack()
+    {
+        // TO DO
+        Attack();
     }
 
     IEnumerator AttackCoroutine()
@@ -35,11 +32,11 @@ public class PlayerMage : MonoBehaviour
 
     private void CreateMega(Vector3 increment)
     {
-        var mega = Instantiate(MegaPrefab, FireTransform);
+        var mega = Instantiate(ProjectilePrefab, FireTransform);
 
-/*        // 将玩家信息存储在弓箭的Projectile2D组件中
-        mega.GetComponent<Projectile2D>().player = GetComponent<Player>();
-        mega.GetComponent<Projectile2D>().damage = GetComponent<Player>().attack;*/
+        // 将玩家信息存储在弓箭的Projectile2D组件中
+        mega.GetComponent<BaseProjectile>().player = GetComponent<Player>();
+        mega.GetComponent<BaseProjectile>().damage = GetComponent<Player>().attack;
 
         var rb = mega.GetComponent<Rigidbody2D>();
 
@@ -47,5 +44,7 @@ public class PlayerMage : MonoBehaviour
         mega.transform.localRotation = Quaternion.identity;
         mega.transform.SetParent(FireTransform);
         rb.velocity = speed * FireTransform.right * Mathf.Sign(character.transform.lossyScale.x) * 1f;
+        mega.transform.LookAt(Vector3.right); //Sets the projectiles rotation to look at the point clicked
+        rb.AddForce(mega.transform.forward * speed); //Set the speed of the projectile by applying force to the rigidbody
     }
 }

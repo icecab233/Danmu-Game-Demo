@@ -5,13 +5,9 @@ using UnityEngine;
 using System.Collections;
 using Assets.HeroEditor4D.SimpleColorPicker.Scripts;
 
-public class PlayerBow : MonoBehaviour
+public class PlayerBow : PlayerWeaponBase
 {
-    private Character character;
     public AnimationClip ClipCharge;
-    public Transform FireTransform;
-    public GameObject ArrowPrefab;
-    public float speed = 30f;
     public bool CreateArrows;
 
     [SerializeField]
@@ -26,10 +22,9 @@ public class PlayerBow : MonoBehaviour
 
     private float _chargeTime;
 
-    private void Start()
+    private new void Start()
     {
-        character = GetComponent<Character>();
-        character.GetReady();
+        base.Start();
         character.Animator.SetInteger("WeaponType", 3);
 
         weapon = character.BowRenderers[3].transform;
@@ -47,13 +42,13 @@ public class PlayerBow : MonoBehaviour
     }
 
     // 创造一个默认的拉弓射箭行为
-    public void BowAttack()
+    public override void Attack()
     {
         StartCoroutine(BowAttackCoroutine());
     }
 
     // 创造一个双箭的拉弓射箭行为
-    public void DoubleBowAttack()
+    public override void DoubleAttack()
     {
         StartCoroutine(DoubleBowAttackCoroutine());
 
@@ -96,11 +91,11 @@ public class PlayerBow : MonoBehaviour
 
     private void CreateArrow(Vector3 increment)
     {
-        var arrow = Instantiate(ArrowPrefab, FireTransform);
+        var arrow = Instantiate(ProjectilePrefab, FireTransform);
 
         // 将玩家信息存储在弓箭的Projectile2D组件中
-        arrow.GetComponent<Projectile2D>().player = GetComponent<Player>();
-        arrow.GetComponent<Projectile2D>().damage = GetComponent<Player>().attack;
+        arrow.GetComponent<BaseProjectile>().player = GetComponent<Player>();
+        arrow.GetComponent<BaseProjectile>().damage = GetComponent<Player>().attack;
 
         var sr = arrow.GetComponent<SpriteRenderer>();
         var rb = arrow.GetComponent<Rigidbody2D>();
