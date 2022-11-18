@@ -2378,7 +2378,11 @@ Transform:
   m_PrefabInstance: {fileID: 550162243}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!21 &983844521
+=======
+--- !u!21 &996578096
+>>>>>>> Stashed changes
 =======
 --- !u!21 &996578096
 >>>>>>> Stashed changes
@@ -2415,6 +2419,7 @@ Material:
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
     m_Colors:
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     - _halfSize: {r: 122, g: 16.5, b: 0, a: 0}
     - _r: {r: 0, g: 4, b: 4, a: 0}
@@ -2455,6 +2460,11 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _WidthHeightRadius: {r: 400, g: 250, b: 10, a: 0}
+=======
+    - _halfSize: {r: 33, g: 16.5, b: 0, a: 0}
+    - _r: {r: 4, g: 0, b: 0, a: 4}
+    - _rect2props: {r: 2.0000038, g: -0.0000038146973, b: 33.587574, a: 33.587574}
+>>>>>>> Stashed changes
 =======
     - _halfSize: {r: 33, g: 16.5, b: 0, a: 0}
     - _r: {r: 4, g: 0, b: 0, a: 4}
@@ -2823,9 +2833,14 @@ CanvasRenderer:
   m_GameObject: {fileID: 1071384029}
   m_CullTransparentMesh: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!21 &1121426548
 Material:
   serializedVersion: 8
+=======
+--- !u!1 &1110705873
+GameObject:
+>>>>>>> Stashed changes
 =======
 --- !u!1 &1110705873
 GameObject:
@@ -2834,6 +2849,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   m_Name: UI/RoundedCorners/IndependentRoundedCorners
   m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
@@ -2867,6 +2883,8 @@ GameObject:
     - _rect2props: {r: 2.0000038, g: -0.0000038146973, b: 33.587574, a: 33.587574}
   m_BuildTextureStacks: []
 =======
+=======
+>>>>>>> Stashed changes
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1110705874}
@@ -2892,6 +2910,9 @@ Transform:
   m_Father: {fileID: 847444906}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1 &1136598972
 GameObject:
@@ -5913,7 +5934,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Material: {fileID: 1742631898}
+=======
+  m_Material: {fileID: 1711274853}
+>>>>>>> Stashed changes
 =======
   m_Material: {fileID: 1711274853}
 >>>>>>> Stashed changes
@@ -6152,7 +6177,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Material: {fileID: 1006861456}
+=======
+  m_Material: {fileID: 804190490}
+>>>>>>> Stashed changes
 =======
   m_Material: {fileID: 804190490}
 >>>>>>> Stashed changes
@@ -6666,7 +6695,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Material: {fileID: 1121426548}
+=======
+  m_Material: {fileID: 996578096}
+>>>>>>> Stashed changes
 =======
   m_Material: {fileID: 996578096}
 >>>>>>> Stashed changes
@@ -6803,7 +6836,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Material: {fileID: 983844521}
+=======
+  m_Material: {fileID: 1411873809}
+>>>>>>> Stashed changes
 =======
   m_Material: {fileID: 1411873809}
 >>>>>>> Stashed changes
