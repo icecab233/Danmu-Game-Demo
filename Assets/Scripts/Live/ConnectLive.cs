@@ -28,14 +28,19 @@ public class ConnectLive : MonoBehaviour
     private WebSocketBLiveClient m_WebSocketBLiveClient;
     private InteractivePlayHeartBeat m_PlayHeartBeat;
     private string gameId;
-    private const string accessKeySecret = "o5kBVXQYiYLbjQIvqX7rEJ4wmCdKHm";
-    private const string accessKeyId = "eLlAG7R9VRVmBeGPA5UmlUeH";
+    //private const string accessKeySecret = "o5kBVXQYiYLbjQIvqX7rEJ4wmCdKHm";
+    //大谷的
+    private const string accessKeySecret = "N8nq3foGvj4OsJ098OXp0ZsYdfl6LR";
+    //大谷的
+    //private const string accessKeyId = "eLlAG7R9VRVmBeGPA5UmlUeH";
+    private const string accessKeyId = "P9qEykzWPuR4FC4b2UiwDcgH";
     public string appId;
 
     public Action ConnectSuccess;
     public Action ConnectFailure;
 
     public LiveManager liveManager;
+    //测试用的脚本类
 
     public async void LinkStart(string code)
     {
@@ -140,7 +145,7 @@ public class ConnectLive : MonoBehaviour
         sb.Append(dm.msg);
         Debug.Log(sb);
 
-        liveManager.OnDanmu(dm.userName, dm.msg);
+        liveManager.OnDanmu(dm.userName, dm.uid,dm.msg);
     }
 
 
