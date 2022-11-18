@@ -13,15 +13,17 @@ public class Player : MonoBehaviour
     /// 玩家类型：
     ///     1. archer：使用PlayerBow类进行弓箭射击
     ///     2. warrior: 使用XXX类进行近战攻击
-    ///     3. defender：只防御，不进行攻击
+    ///     3. defender：无敌防御者
     ///     4. wizard: 使用PlayerMage进行魔法弹射击
+    ///     5. gunner: 使用PlayerGun进行子弹射击
     /// </summary>
     public enum PlayerType
     {
         archer,
         warrior,
         defender,
-        wizard
+        wizard,
+        gunner
     }
     public PlayerType playerType;
 
@@ -31,7 +33,7 @@ public class Player : MonoBehaviour
     ///     2. attack，开始自动攻击
     ///     3. rage，狂暴自动攻击
     /// </summary>
-    
+
     public enum PlayerStatus
     {
         idle,
@@ -63,9 +65,9 @@ public class Player : MonoBehaviour
     [SerializeField] Slider EXPSlider;
     [SerializeField] Sprite[] levelFlags;
     [SerializeField] Image levelFlagImage;
-    private PlayerBow playerBow;
-    private PlayerMage playerMage;
+
     private Character character;
+    private PlayerWeaponBase playerWeapon;
 
     public ParticleSystem levelUpFX;
     public ParticleSystem rageFX;
@@ -74,50 +76,64 @@ public class Player : MonoBehaviour
     public PlayerEvent OnPlayerLevelUpEvent;
 
     private float time;
-    
+
     private void Awake()
     {
-        character = GetComponent<Character>();
-
         Init();
     }
 
     private void Update()
     {
+        if (playerType == PlayerType.defender) return;
+        switch (playerStatus)
+        {
+            case PlayerStatus.idle:
+                break;
+            case PlayerStatus.attack:
+                if (Time.time - time >= attackTime)
+                {
+                    time = Time.time;
+                    playerWeapon.Attack();
+                }
+                break;
+            case PlayerStatus.rage:
+                playerWeapon.DoubleAttack();
+                break;
+        }
+    }
+
+    private void UpdateSkill(int level)
+    {
+        hpMax = PlayerData.hpMaxOfLevel[level];
+        hp = hpMax;
+        attack = PlayerData.attackOfLevel[level];
+        attackSpeed = PlayerData.attackSpeedOfLevel[level];
+        attackTime = PlayerData.attackTimeOfLevel[level];
+    }
+
+    private void InitWeapon()
+    {
         switch (playerType)
         {
             case PlayerType.archer:
-                // 在一定时间间隔内自动攻击
-                if (Time.time - time >= attackTime)
-                {
-                    time = Time.time;
-                    switch (playerStatus)
-                    {
-                        case PlayerStatus.idle:
-                            break;
-                        case PlayerStatus.attack:
-                            playerBow.BowAttack();
-                            break;
-                        case PlayerStatus.rage:
-                            playerBow.DoubleBowAttack();
-                            break;
-                    }
-                }
+                playerWeapon = GetComponent<PlayerBow>();
                 break;
-
+            case PlayerType.defender:
+                break;
+            case PlayerType.gunner:
+                playerWeapon = GetComponent<PlayerGun>();
+                break;
+            case PlayerType.warrior:
+                break;
             case PlayerType.wizard:
-                // 在一定时间间隔内自动攻击
-                if (Time.time - time >= attackTime)
-                {
-                    time = Time.time;
-                    playerMage.Attack();
-                }
+                playerWeapon = GetComponent<PlayerMage>();
                 break;
         }
     }
 
     private void Init()
     {
+        character = GetComponent<Character>();
         exp = 0;
         level = 0;
         time = Time.time;
@@ -125,22 +141,19 @@ public class Player : MonoBehaviour
         // TO DO 应该由外部控制状态
         playerStatus = PlayerStatus.attack;
 
+        UpdateSkill(0);
+
         switch (playerType)
         {
             case PlayerType.archer:
-                hpMax = PlayerData.hpMaxOfLevel[level];
-                hp = hpMax;
-                attack = PlayerData.attackOfLevel[0];
-                attackSpeed = PlayerData.attackSpeedOfLevel[0];
-                attackTime = PlayerData.attackTimeOfLevel[0];
-
-                playerBow = GetComponent<PlayerBow>();
-                character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[0]], HeroEditor.Common.Enums.EquipmentPart.Bow);
+                playerWeapon = GetComponent<PlayerBow>();
+                character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[0]], EquipmentPart.Bow);
                 displayText();
                 break;
             case PlayerType.warrior:
                 break;
             case PlayerType.defender:
+                // 重写无敌防御者的属性
                 hpMax = 1000000;
                 hp = 100000;
                 attack = 0;
@@ -148,11 +161,14 @@ public class Player : MonoBehaviour
                 attackTime = 0f;
                 break;
             case PlayerType.wizard:
-                playerMage = GetComponent<PlayerMage>();
+                playerWeapon = GetComponent<PlayerMage>();
+                break;
+            case PlayerType.gunner:
+                playerWeapon = GetComponent<PlayerGun>();
                 break;
         }
 
-        
+
     }
 
     // 获取战力
@@ -170,6 +186,13 @@ public class Player : MonoBehaviour
 
         // refresh UI name text display
         nameText.text = playerName;
+    }
+
+    // 更改职业
+    public void changeType(PlayerType newPlayerType)
+    {
+        playerType = newPlayerType;
+        InitWeapon();
     }
 
     // 外部调用，提升角色exp，需要计算等级提升等
@@ -190,10 +213,18 @@ public class Player : MonoBehaviour
             attackTime = PlayerData.attackTimeOfLevel[level];
             hpMax = PlayerData.hpMaxOfLevel[level];
             hp = hpMax;
-            // 换弓
-            character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[level]], EquipmentPart.Bow);
+
             // FX
             levelUpFX.Play();
+
+            // 更换武器
+            switch (playerType)
+            {
+                case PlayerType.archer:
+                    // 换弓
+                    character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[level]], EquipmentPart.Bow);
+                    break;
+            }
 
             OnPlayerLevelUpEvent.Raise(this);
         }
@@ -222,7 +253,8 @@ public class Player : MonoBehaviour
         {
             hp -= damage;
             displayText();
-        } else
+        }
+        else
         {
             hp = 0;
             displayText();
@@ -250,19 +282,20 @@ public class Player : MonoBehaviour
     {
         // level
         levelText.text = level.ToString();
-        levelFlagImage.sprite=levelFlags[level];
+        levelFlagImage.sprite = levelFlags[level];
 
         // 根据百分比，编辑exptext，显示升级进度
         if (level == PlayerData.maxLevel)
         {
             EXPSlider.value = 1.0f;
             return;
-        } else
+        }
+        else
         {
             int denominator = PlayerData.expOfLevel[level + 1] - PlayerData.expOfLevel[level];
             int numerator = exp - PlayerData.expOfLevel[level];
             float percent = (numerator * 1.0f) / (denominator * 1.0f);
-            EXPSlider.value=percent;
+            EXPSlider.value = percent;
         }
 
         // 生命值

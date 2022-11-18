@@ -101,10 +101,10 @@ public class MonsterBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // 被弓箭等远程射击物击中
-        if (collision.GetComponent<Projectile2D>() != null)
+        if (collision.GetComponent<BaseProjectile>() != null)
         {
-            getHit(collision.GetComponent<Projectile2D>().damage, collision.GetComponent<Projectile2D>().player);
-            collision.GetComponent<Projectile2D>().BangSelf();
+            getHit(collision.GetComponent<BaseProjectile>().damage, collision.GetComponent<BaseProjectile>().player);
+            collision.GetComponent<BaseProjectile>().BangSelf();
             return;
         }
         // 攻击玩家
