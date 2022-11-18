@@ -1,5 +1,6 @@
 using UnityEngine;
 using DanmuGame.events;
+using System.Data;
 
 public class LiveManager : MonoBehaviour
 {
@@ -8,13 +9,21 @@ public class LiveManager : MonoBehaviour
     public StringEvent RandomizePlayerEvent;
     public VoidEvent RageModeForAllEvent;
     public StringEvent AddExpToPlayerFromGift1Event;
-
-    public void OnDanmu(string userName, string danmu)
+    //引用数据库
+    MySqlAccess mysql;
+    void Start()
+    {
+        mysql = new MySqlAccess("81.68.234.49", "3306", "dagu", "Tony6666", "nia");
+        mysql.CloseSql();
+    }
+    public void OnDanmu(string userName, long uid,string danmu)
     {
         switch (danmu)
         {
             case "加入":
                 AddNewPlayerEvent.Raise(userName);
+                //将新玩家信息存入数据库，默认积分为0
+                addNewPlayerToDB(userName,uid,0);
                 break;
             case "随机":
                 RandomizePlayerEvent.Raise(userName);
@@ -40,5 +49,23 @@ public class LiveManager : MonoBehaviour
                 }
                 break;
         }
+    }
+     void addNewPlayerToDB(string gamerName,long gamerUid,int gamerScore)
+    {
+        mysql.OpenSql();
+        DataSet ds=mysql.QuerySet("select * from GamerInformation where name=\""+gamerName+"\";");
+        DataTable table=ds.Tables[0];
+        if(table.Rows.Count==0)
+        {
+            Debug.Log("欢迎新玩家");
+            mysql.QuerySet("INSERT INTO `nia`.`GamerInformation`(`name`,`uid`,`score`) VALUES ('"+gamerName+"','" + gamerUid + "','"+gamerScore+"')");
+            
+        }
+        else
+        {
+            Debug.Log("欢迎老玩家");
+        }
+        mysql.CloseSql();
+       
     }
 }
