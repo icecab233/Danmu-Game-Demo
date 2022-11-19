@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class PlayerWeaponBase : MonoBehaviour
 {
     protected Character character;
+    protected Player player;
     public Transform FireTransform;
     public GameObject ProjectilePrefab;
     public float speed = 30f;
@@ -12,6 +13,7 @@ public abstract class PlayerWeaponBase : MonoBehaviour
     protected void Start()
     {
         character = GetComponent<Character>();
+        player = GetComponent<Player>();
         character.GetReady();
     }
 

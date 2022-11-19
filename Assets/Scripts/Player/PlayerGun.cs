@@ -11,12 +11,9 @@ public class PlayerGun : PlayerWeaponBase
     public Firearm firearm;
     public Transform ArmR;
 
-    private int attackCount;
-
     private new void Start()
     {
         base.Start();
-        attackCount = 0;
     }
 
     public override void Attack()
@@ -33,8 +30,9 @@ public class PlayerGun : PlayerWeaponBase
     IEnumerator AttackCoroutine()
     {
         firearm.Fire.FireButtonDown = true;
-        // 每次攻击，开枪和装弹交替进行
-        if (attackCount++ % 2 == 0) CreateBullet(Vector3.zero);
+        // 等待一段时间，让Animator的Reloading bool生效，来判断当前是不是要换弹，从而确定需不需要创建子弹
+        yield return new WaitForSeconds(0.01f);
+        if (!character.Animator.GetBool("Reloading")) CreateBullet(Vector3.zero);
         yield return new WaitForSeconds(delay);
         firearm.Fire.FireButtonDown = false;
         yield break;
@@ -63,6 +61,7 @@ public class PlayerGun : PlayerWeaponBase
     /// </summary>
     public void LateUpdate()
     {
+        if (player.playerType != Player.PlayerType.gunner) return;
 
         Transform arm;
         Transform weapon;

@@ -3,11 +3,10 @@ using TMPro;
 using System.Collections;
 using Assets.HeroEditor.Common.CharacterScripts;
 using UnityEngine.UI;
-using Assets.HeroEditor.Common.CommonScripts;
 using HeroEditor.Common.Enums;
 using DanmuGame.events;
 
-public class Player : MonoBehaviour
+public partial class Player : MonoBehaviour
 {
     /// <summary>
     /// 玩家类型：
@@ -67,7 +66,6 @@ public class Player : MonoBehaviour
     [SerializeField] Image levelFlagImage;
 
     private Character character;
-    private PlayerWeaponBase playerWeapon;
 
     public ParticleSystem levelUpFX;
     public ParticleSystem rageFX;
@@ -102,35 +100,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void UpdateSkill(int level)
-    {
-        hpMax = PlayerData.hpMaxOfLevel[level];
-        hp = hpMax;
-        attack = PlayerData.attackOfLevel[level];
-        attackSpeed = PlayerData.attackSpeedOfLevel[level];
-        attackTime = PlayerData.attackTimeOfLevel[level];
-    }
-
-    private void InitWeapon()
-    {
-        switch (playerType)
-        {
-            case PlayerType.archer:
-                playerWeapon = GetComponent<PlayerBow>();
-                break;
-            case PlayerType.defender:
-                break;
-            case PlayerType.gunner:
-                playerWeapon = GetComponent<PlayerGun>();
-                break;
-            case PlayerType.warrior:
-                break;
-            case PlayerType.wizard:
-                playerWeapon = GetComponent<PlayerMage>();
-                break;
-        }
-    }
-
     private void Init()
     {
         character = GetComponent<Character>();
@@ -141,13 +110,16 @@ public class Player : MonoBehaviour
         // TO DO 应该由外部控制状态
         playerStatus = PlayerStatus.attack;
 
-        UpdateSkill(0);
+        if (playerType != PlayerType.defender)
+        {
+            UpdateSkill();
+            UpdateEquip();
+        }
 
         switch (playerType)
         {
             case PlayerType.archer:
                 playerWeapon = GetComponent<PlayerBow>();
-                character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[0]], EquipmentPart.Bow);
                 displayText();
                 break;
             case PlayerType.warrior:
@@ -167,8 +139,15 @@ public class Player : MonoBehaviour
                 playerWeapon = GetComponent<PlayerGun>();
                 break;
         }
+    }
 
-
+    private void UpdateSkill()
+    {
+        hpMax = PlayerData.hpMaxOfLevel[level];
+        hp = hpMax;
+        attack = PlayerData.attackOfLevel[level];
+        attackSpeed = PlayerData.attackSpeedOfLevel[level];
+        attackTime = PlayerData.attackTimeOfLevel[level];
     }
 
     // 获取战力
@@ -188,11 +167,19 @@ public class Player : MonoBehaviour
         nameText.text = playerName;
     }
 
-    // 更改职业
-    public void changeType(PlayerType newPlayerType)
+    private void levelUp()
     {
-        playerType = newPlayerType;
-        InitWeapon();
+        level++;
+
+        // 做出升级后的强化...
+        UpdateSkill();
+
+        UpdateEquip();
+
+        // FX
+        levelUpFX.Play();
+
+        OnPlayerLevelUpEvent.Raise(this);
     }
 
     // 外部调用，提升角色exp，需要计算等级提升等
@@ -205,43 +192,10 @@ public class Player : MonoBehaviour
         // level up
         if (level + 1 <= PlayerData.maxLevel && exp >= PlayerData.expOfLevel[level + 1])
         {
-            level++;
-
-            // 做出升级后的强化...
-            attack = PlayerData.attackOfLevel[level];
-            attackSpeed = PlayerData.attackSpeedOfLevel[level];
-            attackTime = PlayerData.attackTimeOfLevel[level];
-            hpMax = PlayerData.hpMaxOfLevel[level];
-            hp = hpMax;
-
-            // FX
-            levelUpFX.Play();
-
-            // 更换武器
-            switch (playerType)
-            {
-                case PlayerType.archer:
-                    // 换弓
-                    character.Equip(character.SpriteCollection.Bow[PlayerData.bowIdOfLevel[level]], EquipmentPart.Bow);
-                    break;
-            }
-
-            OnPlayerLevelUpEvent.Raise(this);
+            levelUp();
         }
 
         displayText();
-    }
-
-    // 外部调用，角色随机化
-    public void Randomize()
-    {
-        Character character = GetComponent<Character>();
-        character.Equip(character.SpriteCollection.Helmet.Random(), EquipmentPart.Helmet);
-        character.Equip(character.SpriteCollection.Armor.Random(), EquipmentPart.Armor);
-        character.SetBody(character.SpriteCollection.Hair.Random(), BodyPart.Hair, CharacterExtensions.RandomColor);
-        character.SetBody(character.SpriteCollection.Eyebrows.Random(), BodyPart.Eyebrows);
-        character.SetBody(character.SpriteCollection.Eyes.Random(), BodyPart.Eyes, CharacterExtensions.RandomColor);
-        character.SetBody(character.SpriteCollection.Mouth.Random(), BodyPart.Mouth);
     }
 
     // 外部调用，角色受伤

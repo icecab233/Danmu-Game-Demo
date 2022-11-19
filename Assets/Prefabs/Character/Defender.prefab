@@ -739,6 +739,7 @@ MonoBehaviour:
   rageFX: {fileID: 0}
   OnPlayerDieEvent: {fileID: 0}
   OnPlayerLevelUpEvent: {fileID: 0}
+  weaponType: 0
 --- !u!61 &1983508403575181537
 BoxCollider2D:
   m_ObjectHideFlags: 0

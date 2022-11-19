@@ -8,7 +8,6 @@ public class PlayerMage : PlayerWeaponBase
     private new void Start()
     {
         base.Start();
-        character.Animator.SetInteger("WeaponType", 0);
     }
 
     public override void Attack()

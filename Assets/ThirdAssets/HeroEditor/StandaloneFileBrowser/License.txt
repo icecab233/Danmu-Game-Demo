@@ -1,2 +1,0 @@
-UnityStandaloneFileBrowser for Unity is used udner the MIT License.
-You can visit GitHub for support and updates: https://github.com/gkngkc/UnityStandaloneFileBrowser

@@ -30,17 +30,6 @@ public class PlayerBow : PlayerWeaponBase
         weapon = character.BowRenderers[3].transform;
     }
 
-    /// <summary>
-    /// Called each frame update, weapon to mouse rotation example.
-    /// </summary>
-    public void LateUpdate()
-    {
-        if (character.IsReady())
-        {
-            RotateArm(ArmL, weapon, ArmL.position + 1000 * Vector3.right, -40, 40);
-        }
-    }
-
     // 创造一个默认的拉弓射箭行为
     public override void Attack()
     {
@@ -107,6 +96,19 @@ public class PlayerBow : PlayerWeaponBase
         rb.velocity = speed * FireTransform.right * Mathf.Sign(character.transform.lossyScale.x) * 1f;
 
         var characterCollider = character.GetComponent<Collider>();
+    }
+
+    /// <summary>
+    /// Called each frame update, weapon to mouse rotation example.
+    /// </summary>
+    public void LateUpdate()
+    {
+        if (player.playerType != Player.PlayerType.archer) return;
+
+        if (character.IsReady())
+        {
+            RotateArm(ArmL, weapon, ArmL.position + 1000 * Vector3.right, -40, 40);
+        }
     }
 
 
