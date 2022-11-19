@@ -48,5 +48,11 @@ public static class PlayerData
     "RevolverTypeA", "RevolverTypeB", "RevolverTypeC", "OldShotgun", "OldShotgun", "RifleTypeF",
     "RifleTypeD", "RifleTypeA"};
 
+    // 法师开始的等级
     public static int wizardMinLevel = 17;
+    // 法师一共有多少级
+    public static int wizardLevelLength = 10;
+    public static string[] mageNameOfLevel = {"HardwoodWand", "DruidWand", "DrownedGoblinHand",
+    "WaterAdeptWand1", "SwampMage2Staff", "IceWizardWand", "FireAdeptWand1", "PyromancerWand",
+    "CardinalWand", "BishopWand"};
 }

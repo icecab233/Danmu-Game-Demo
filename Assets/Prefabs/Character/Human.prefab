@@ -63822,6 +63822,7 @@ MonoBehaviour:
   rageFX: {fileID: 1968116656847322311}
   OnPlayerDieEvent: {fileID: 11400000, guid: aaac0d57edc5bbe4d92fab2da920fdd4, type: 2}
   OnPlayerLevelUpEvent: {fileID: 11400000, guid: c68fcc46f2ec1334c814681e35cdfc68, type: 2}
+  playerEquipData: {fileID: 11400000, guid: f7717af0c9037e0438b364311e212032, type: 2}
   weaponType: 0
 --- !u!50 &4062556088775222646
 Rigidbody2D:
