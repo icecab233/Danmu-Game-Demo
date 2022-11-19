@@ -9,6 +9,7 @@ using System.Linq;
 
 public partial class Player : MonoBehaviour
 {
+    public PlayerScriptableObject playerEquipData;
     public enum WeaponType
     {
         Bow,
@@ -52,6 +53,8 @@ public partial class Player : MonoBehaviour
         else if (level >= PlayerData.wizardMinLevel)
         {
             playerType = PlayerType.wizard;
+            weaponType = WeaponType.Mega;
+            weaponName = PlayerData.mageNameOfLevel[level - PlayerData.wizardMinLevel];
         }
 
         UpdateWeapon();
@@ -91,6 +94,9 @@ public partial class Player : MonoBehaviour
 
             character.Animator.SetBool("Ready", true);
             character.Animator.SetBool("Action", false);
+
+            // Projectile
+            playerWeapon.ProjectilePrefab = playerEquipData.gunProjectileOfLevel[level - PlayerData.gunnerMinLevel];
         }
 
         if (weaponType == WeaponType.Firearm2H)
@@ -103,6 +109,9 @@ public partial class Player : MonoBehaviour
             
             character.Animator.SetBool("Ready", true);
             character.Animator.SetBool("Action", false);
+
+            // Projectile
+            playerWeapon.ProjectilePrefab = playerEquipData.gunProjectileOfLevel[level - PlayerData.gunnerMinLevel];
         }
 
         if (weaponType == WeaponType.Mega)
@@ -110,9 +119,12 @@ public partial class Player : MonoBehaviour
             character.Equip(null, EquipmentPart.Shield);
             character.Equip(null, EquipmentPart.Back);
 
-            character.Equip(character.SpriteCollection.MeleeWeapon1H[4], EquipmentPart.MeleeWeapon1H);
+            character.Equip(character.SpriteCollection.MeleeWeapon1H.Find(weapon => weapon.Name == weaponName), EquipmentPart.MeleeWeapon1H);
             character.Animator.SetBool("Ready", true);
             character.Animator.SetBool("Action", false);
+
+            // Projectile
+            playerWeapon.ProjectilePrefab = playerEquipData.mageProjectileOfLevel[level - PlayerData.wizardMinLevel];
         }
     }
 

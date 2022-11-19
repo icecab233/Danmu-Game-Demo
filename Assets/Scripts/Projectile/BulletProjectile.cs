@@ -11,6 +11,7 @@ public class BulletProjectile : BaseProjectile
 
     public float muzzleScaleFactor = 1.0f;
     public float impactScaleFactor = 1.0f;
+    public float projectileScaleFactor = 1.0f;
     private Transform FXTransform;
 
     new void Start()
@@ -20,6 +21,7 @@ public class BulletProjectile : BaseProjectile
         FXTransform = GameObject.Find("FXTransform").transform;
 
         projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation, transform) as GameObject;
+        projectileParticle.transform.localScale = new Vector3(projectileScaleFactor, projectileScaleFactor, projectileScaleFactor);
         if (muzzleParticle)
         {
             muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;

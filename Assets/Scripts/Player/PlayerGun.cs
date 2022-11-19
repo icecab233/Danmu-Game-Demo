@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.HeroEditor.Common.CharacterScripts.Firearms;
-using Assets.HeroEditor.Common.CharacterScripts;
-using HeroEditor.Common.Enums;
 using System;
 
 public class PlayerGun : PlayerWeaponBase
