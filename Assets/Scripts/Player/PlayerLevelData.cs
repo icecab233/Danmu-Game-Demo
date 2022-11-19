@@ -10,7 +10,6 @@ public class PlayerLevelData:ScriptableObject
     public Sprite getLevelSprites(int levelNum)
     {
         int index=0;
-        Debug.Log(LastLevelIndex.Length);
         for(int i=0;i<LastLevelIndex.Length;i++)
         {
             if(levelNum<=LastLevelIndex[i])

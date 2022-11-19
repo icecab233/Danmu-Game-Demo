@@ -124,6 +124,7 @@ public partial class Player : MonoBehaviour
             character.Animator.SetBool("Action", false);
 
             // Projectile
+            Debug.Log("sdadsad"+(level - PlayerData.wizardMinLevel));
             playerWeapon.ProjectilePrefab = playerEquipData.mageProjectileOfLevel[level - PlayerData.wizardMinLevel];
         }
     }
