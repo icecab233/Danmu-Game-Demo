@@ -62,8 +62,8 @@ public partial class Player : MonoBehaviour
 
     [SerializeField] Slider HPSlider;
     [SerializeField] Slider EXPSlider;
-    [SerializeField] Sprite[] levelFlags;
     [SerializeField] Image levelFlagImage;
+    [SerializeField] PlayerLevelData playerLevelData;
 
     private Character character;
 
@@ -231,12 +231,13 @@ public partial class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // 更新人物附近的文字
+    // 更新人物附近的文字(等级及等级图标)
     private void displayText()
     {
         // level
         levelText.text = level.ToString();
-        levelFlagImage.sprite = levelFlags[level];
+        levelFlagImage.sprite = playerLevelData.getLevelSprites(level);
+        //levelFlagImage.sprite = levelFlags[level];
 
         // 根据百分比，编辑exptext，显示升级进度
         if (level == PlayerData.maxLevel)

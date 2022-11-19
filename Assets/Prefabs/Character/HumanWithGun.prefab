@@ -831,6 +831,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e59a816b2f7bd6f418fe85f5c57ea625, type: 3}
   - {fileID: 21300000, guid: 0cbaa2af0f4a3a944a7f6300648bceae, type: 3}
   levelFlagImage: {fileID: 6835455464646154977}
+  playerLevelData: {fileID: 11400000, guid: cb9f6386aede36d4eb0d3035829fca85, type: 2}
   levelUpFX: {fileID: 7228783613935311171}
   rageFX: {fileID: 4235624594939077660}
   OnPlayerDieEvent: {fileID: 11400000, guid: aaac0d57edc5bbe4d92fab2da920fdd4, type: 2}

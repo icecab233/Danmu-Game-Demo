@@ -8,8 +8,8 @@ public class Announcement : MonoBehaviour
     public TextMeshProUGUI annText;
     public float showTime = 5.0f;
     public GameObject announcer;
-    public Color[] announcerColors;
     public Image annoucerImage;
+    [SerializeField]PlayerLevelData playerLevelData;
     private void Start()
     {
         announcer.gameObject.SetActive(false);
@@ -17,7 +17,8 @@ public class Announcement : MonoBehaviour
 
     public void LevelUpAnn(Player player)
     {
-        annoucerImage.color = announcerColors[player.level];
+        Debug.Log(player.level);
+        annoucerImage.color=playerLevelData.getLevelColors(player.level);
         annText.text = player.playerName + ConstantText.levelUpAnn + player.level;
         StartCoroutine(AnnTextDisappearCoroutine());
     }
