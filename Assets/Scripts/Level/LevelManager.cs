@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour
                 StartLevel(0);
                 return;
             }
-            popUpCountDown.showText = "Restarting GAME\nIn " + leftTime.ToString("0.000") + " Seconds";
+            popUpCountDown.showText = "游戏重置于\n " + leftTime.ToString("0.000") + " 秒后";
         }
     }
 

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: f20bb099ed050644c937f902642ca55f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - GEETYPE-C4PineGBT-Flash
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b3fb1f1dd1a22004787da43509d3de1f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -18,16 +18,16 @@ public class LevelInfoDisplay : MonoBehaviour
     // To Do: 从每帧刷新改为事件订阅式刷新
     void Update()
     {
-        waveNumberText.text = "Wave: " + (waveManager.waveNow+1) + "/" + (waveManager.levelData.waveCount);
+        waveNumberText.text = "波数: " + (waveManager.waveNow+1) + "/" + (waveManager.levelData.waveCount);
         switch (waveManager.currentWaveStatus)
         {
             case WaveManager.WaveStatus.Preparing:
-                statusText.text = "Prepare Time";
+                statusText.text = "准备时间";
                 leftTimeText.text = waveManager.leftTime.ToString("0.0");
                 break;
             case WaveManager.WaveStatus.Battle:
             case WaveManager.WaveStatus.Waiting:
-                statusText.text = "Battle Time";
+                statusText.text = "战斗时间";
                 leftTimeText.text = waveManager.leftTime.ToString("0.0");
                 //进度条同步滚动
                 progressBar.GetComponent<Slider>().value=1-waveManager.leftTime/waveManager.levelData.waveTime[waveManager.waveNow];
@@ -42,7 +42,7 @@ public class LevelInfoDisplay : MonoBehaviour
     public void ShowWaveBroadcaster(int waveNow)
     {
         GameObject gameObject=Instantiate(WaveBroadcasterNormal,transform);
-        gameObject.GetComponentInChildren<TextMeshProUGUI>().text="Wave: " + ++waveNow;
+        gameObject.GetComponentInChildren<TextMeshProUGUI>().text="波数: " + ++waveNow;
         Destroy(gameObject, 5f);
     }
     //改变进度条上的数字
