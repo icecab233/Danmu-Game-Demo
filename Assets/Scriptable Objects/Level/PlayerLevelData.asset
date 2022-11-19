@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941a89807412d4444946a4de34afd43c, type: 3}
   m_Name: PlayerLevelData
   m_EditorClassIdentifier: 
-  LastLevelIndex: 060000000b000000100000001300000016000000e7030000
+  LastLevelIndex: 050000000b000000100000001300000016000000e7030000
   levelSprites:
   - {fileID: 21300000, guid: 2e50f1aeaa95ff4429ca634cfdb6b14e, type: 3}
   - {fileID: 21300000, guid: 75fee6ff01a79064ca6e8bbbd2467bcd, type: 3}

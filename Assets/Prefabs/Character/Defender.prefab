@@ -733,12 +733,13 @@ MonoBehaviour:
   levelText: {fileID: 0}
   HPSlider: {fileID: 0}
   EXPSlider: {fileID: 0}
-  levelFlags: []
   levelFlagImage: {fileID: 0}
+  playerLevelData: {fileID: 0}
   levelUpFX: {fileID: 0}
   rageFX: {fileID: 0}
   OnPlayerDieEvent: {fileID: 0}
   OnPlayerLevelUpEvent: {fileID: 0}
+  playerEquipData: {fileID: 0}
   weaponType: 0
 --- !u!61 &1983508403575181537
 BoxCollider2D:

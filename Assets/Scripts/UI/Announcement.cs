@@ -17,7 +17,6 @@ public class Announcement : MonoBehaviour
 
     public void LevelUpAnn(Player player)
     {
-        Debug.Log(player.level);
         annoucerImage.color=playerLevelData.getLevelColors(player.level);
         annText.text = player.playerName + ConstantText.levelUpAnn + player.level;
         StartCoroutine(AnnTextDisappearCoroutine());
