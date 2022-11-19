@@ -187,7 +187,7 @@ public class PlayerManager : MonoBehaviour
     public void AddExpFromGift1(string name)
     {
         int id = GetIdByName(name);
-        playerList[id].addExp(100);
+        playerList[id].addExp(1000);
     }
 
     // 每隔一定时间进行一次所有玩家CP计算

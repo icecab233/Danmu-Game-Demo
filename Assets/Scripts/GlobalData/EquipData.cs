@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New PlayerScriptableObjectData" ,menuName = "ScriptableObjects/PlayerScriptableObjectData")]
-public class PlayerScriptableObject : ScriptableObject
+[CreateAssetMenu(fileName = "New EquipData", menuName = "ScriptableObjects/EquipData")]
+public class EquipData : ScriptableObject
 {
     // 枪手每个等级的子弹投射物prefab
     public GameObject[] gunProjectileOfLevel;

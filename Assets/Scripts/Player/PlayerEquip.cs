@@ -9,7 +9,7 @@ using System.Linq;
 
 public partial class Player : MonoBehaviour
 {
-    public PlayerScriptableObject playerEquipData;
+    public EquipData equipData;
     public enum WeaponType
     {
         Bow,
@@ -96,7 +96,7 @@ public partial class Player : MonoBehaviour
             character.Animator.SetBool("Action", false);
 
             // Projectile
-            playerWeapon.ProjectilePrefab = playerEquipData.gunProjectileOfLevel[level - PlayerData.gunnerMinLevel];
+            playerWeapon.ProjectilePrefab = equipData.gunProjectileOfLevel[level - PlayerData.gunnerMinLevel];
         }
 
         if (weaponType == WeaponType.Firearm2H)
@@ -111,7 +111,7 @@ public partial class Player : MonoBehaviour
             character.Animator.SetBool("Action", false);
 
             // Projectile
-            playerWeapon.ProjectilePrefab = playerEquipData.gunProjectileOfLevel[level - PlayerData.gunnerMinLevel];
+            playerWeapon.ProjectilePrefab = equipData.gunProjectileOfLevel[level - PlayerData.gunnerMinLevel];
         }
 
         if (weaponType == WeaponType.Mega)
@@ -124,8 +124,7 @@ public partial class Player : MonoBehaviour
             character.Animator.SetBool("Action", false);
 
             // Projectile
-            Debug.Log("sdadsad"+(level - PlayerData.wizardMinLevel));
-            playerWeapon.ProjectilePrefab = playerEquipData.mageProjectileOfLevel[level - PlayerData.wizardMinLevel];
+            playerWeapon.ProjectilePrefab = equipData.mageProjectileOfLevel[level - PlayerData.wizardMinLevel];
         }
     }
 
