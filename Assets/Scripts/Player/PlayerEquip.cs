@@ -6,6 +6,8 @@ using System;
 using UnityEngine;
 using Assets.HeroEditor.Common.CommonScripts;
 using System.Linq;
+using System.Collections.Generic;
+using HeroEditor.Common;
 
 public partial class Player : MonoBehaviour
 {
@@ -143,12 +145,74 @@ public partial class Player : MonoBehaviour
     // 外部调用，角色随机化
     public void Randomize()
     {
-        Character character = GetComponent<Character>();
         character.Equip(character.SpriteCollection.Helmet.Random(), EquipmentPart.Helmet);
         character.Equip(character.SpriteCollection.Armor.Random(), EquipmentPart.Armor);
         character.SetBody(character.SpriteCollection.Hair.Random(), BodyPart.Hair, CharacterExtensions.RandomColor);
         character.SetBody(character.SpriteCollection.Eyebrows.Random(), BodyPart.Eyebrows);
         character.SetBody(character.SpriteCollection.Eyes.Random(), BodyPart.Eyes, CharacterExtensions.RandomColor);
         character.SetBody(character.SpriteCollection.Mouth.Random(), BodyPart.Mouth);
+    }
+
+    private static string SpriteToString(IEnumerable<SpriteGroupEntry> collection, SpriteRenderer renderer)
+    {
+        return SpriteToString(collection, renderer.sprite, renderer.color);
+    }
+
+    private static string SpriteToString(IEnumerable<SpriteGroupEntry> collection, Sprite sprite, Color color)
+    {
+        if (sprite == null) return null;
+
+        var entry = collection.SingleOrDefault(i => i.Sprites.Contains(sprite));
+
+        if (entry == null)
+        {
+            throw new Exception($"Can't find {sprite.name} in SpriteCollection.");
+        }
+
+        var result = color == Color.white ? entry.Id : entry.Id + "#" + ColorUtility.ToHtmlStringRGBA(color);
+
+        return result;
+    }
+
+    // 外部调用，保存装备
+    private List<string> SaveEquip()
+    {
+        List<string> equip = new List<string>();
+        equip.Add(character.Helmet.texture.name);
+        equip.Add(character.ArmorRenderers[0].sprite.texture.name);
+        equip.Add(character.Hair.texture.name);
+        equip.Add(character.EyebrowsRenderer.sprite.texture.name);
+        equip.Add(character.EyesRenderer.sprite.texture.name);
+        equip.Add(character.MouthRenderer.sprite.texture.name);
+
+        return equip;
+    }
+
+    private void LoadEquip(List<string> equipName)
+    {
+        character.Equip(character.SpriteCollection.Helmet.Find(item => item.Name == equipName[0]), EquipmentPart.Helmet);
+        character.Equip(character.SpriteCollection.Armor.Find(item => item.Name == equipName[1]), EquipmentPart.Armor);
+        character.SetBody(character.SpriteCollection.Hair.Find(item => item.Name == equipName[2]), BodyPart.Hair, CharacterExtensions.RandomColor);
+        character.SetBody(character.SpriteCollection.Eyebrows.Find(item => item.Name == equipName[3]), BodyPart.Eyebrows);
+        character.SetBody(character.SpriteCollection.Eyes.Find(item => item.Name == equipName[4]), BodyPart.Eyes, CharacterExtensions.RandomColor);
+        character.SetBody(character.SpriteCollection.Mouth.Find(item => item.Name == equipName[5]), BodyPart.Mouth);
+    }
+
+    // 外部调用，加载人物
+    public void LoadPlayer(int _level, int _exp, List<string> equipName)
+    {
+        level = _level;
+        exp = _exp;
+        LoadEquip(equipName);
+        UpdateSkill();
+        UpdateEquip();
+    }
+
+    // 外部调用，保存人物
+    public void SavePlayer(out int _level, out int _exp, out List<string> epuipName)
+    {
+        _level = level;
+        _exp = exp;
+        epuipName = SaveEquip();
     }
 }

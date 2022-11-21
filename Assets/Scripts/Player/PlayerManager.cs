@@ -33,6 +33,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private int lineCount;
     private const float updateTimeInterval = 5f;
+    private const float playerDBUpdateInternal = 60f;
 
     private int maxPlayerNum;
 
@@ -63,6 +64,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(GetAllCPCoroutinue());
+        StartCoroutine(UpdateAllPlayerToDB(playerDBUpdateInternal));
         RefreshBots();
     }
 
@@ -71,7 +73,10 @@ public class PlayerManager : MonoBehaviour
         // 仅供测试
         if (Input.GetKeyDown(KeyCode.A))
         {
-            AddNewPlayer("BOT"+Random.Range(10,100));
+            IntString intString = new IntString();
+            intString.IntValue = 0;
+            intString.StringValue = "BOT" + Random.Range(10, 100);
+            AddNewPlayer(intString);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -82,7 +87,7 @@ public class PlayerManager : MonoBehaviour
     // 添加新玩家
     // 添加成功，返回添加后总玩家个数
     // 添加失败，返回-1
-    public void AddNewPlayer(string name)
+    public void AddNewPlayer(IntString intString)
     {
         if (playerList.Count == maxPlayerNum) return;
 
@@ -95,11 +100,11 @@ public class PlayerManager : MonoBehaviour
                 break;
             }
 
-        AddNewPlayer(name, posId);
+        AddNewPlayer(intString.IntValue, intString.StringValue, posId);
     }
 
     // 返回值：-1人数满，-2位置被占，-3玩家重复加入，否则返回当前玩家总数
-    public int AddNewPlayer(string name, int posId)
+    public int AddNewPlayer(int uid, string name, int posId)
     {
         if (playerList.Count == maxPlayerNum) return -1;
         if (posOccupied[posId]) return -2;
@@ -114,14 +119,25 @@ public class PlayerManager : MonoBehaviour
         playerPosMap.Add(player, posId);
         posOccupied[posId] = true;
         playerNameSet.Add(name);
+        player.uid = uid;
 
         OnPlayerOccupyPosEvent.Raise(posId);
 
+        // 检索数据库，如果玩家已经玩过，读取之前保存的数据
+        int level, exp;
+        List<string> equip;
+        bool exist = DatabaseManager.LoadPlayerInDB(uid,ref name, out level, out exp, out equip);
+
+        if (exist)
+        {
+            player.LoadPlayer(level, exp, equip);
+        } else
+        {
+            player.Randomize();
+        }
+
         player.changeName(name);
         player.transform.localPosition = new Vector3(0, 0, 0);
-
-        // Random
-        player.Randomize();
 
         RefreshBots();
         return playerList.Count;
@@ -135,6 +151,12 @@ public class PlayerManager : MonoBehaviour
         playerList.Remove(player);
         playerPosMap.Remove(player);
         playerNameSet.Remove(player.playerName);
+
+        // 保存玩家数据至数据库
+        int level, exp;
+        List<string> equip;
+        player.SavePlayer(out level, out exp, out equip);
+        DatabaseManager.UpdatePlayerInDB(player.uid, player.playerName, level, exp, equip);
 
         RefreshBots();
     }
@@ -209,5 +231,21 @@ public class PlayerManager : MonoBehaviour
             sum += player.GetCP();
         }
         return sum;
+    }
+
+    // 每隔一定时间将所有玩家信息上传至数据库
+    IEnumerator UpdateAllPlayerToDB(float time)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(time);
+            foreach(var player in playerList)
+            {
+                int level, exp;
+                List<string> equip;
+                player.SavePlayer(out level, out exp, out equip);
+                DatabaseManager.UpdatePlayerInDB(player.uid, player.playerName, level, exp, equip);
+            }
+        }
     }
 }

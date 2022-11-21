@@ -21,5 +21,12 @@ public class CustomEventDebugInspector : Editor
         {
             eventDebugger.stringEvent.Raise(eventDebugger.stringEventValue);
         }
+        if (GUILayout.Button("Call IntString Event"))
+        {
+            IntString intString = new IntString();
+            intString.IntValue = eventDebugger.IntValue;
+            intString.StringValue = eventDebugger.StringValue;
+            eventDebugger.intStringEvent.Raise(intString);
+        }
     }
 }

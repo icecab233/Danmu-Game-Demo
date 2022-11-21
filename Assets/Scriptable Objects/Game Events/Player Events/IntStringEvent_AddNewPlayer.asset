@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92883d97f7f9c3047ac534e5f32b459e, type: 3}
-  m_Name: StringEvent_AddNewPlayer
+  m_Script: {fileID: 11500000, guid: 27549df819d8d684d9e022dd5c16f2dd, type: 3}
+  m_Name: IntStringEvent_AddNewPlayer
   m_EditorClassIdentifier: 

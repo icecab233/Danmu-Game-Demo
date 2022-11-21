@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using Assets.HeroEditor.Common.ExampleScripts;
 using UnityEngine.UI;
+using DanmuGame.events;
 
 public class MonsterBehavior : MonoBehaviour
 {
@@ -39,6 +40,9 @@ public class MonsterBehavior : MonoBehaviour
     public MonsterStatus currentMonsterStatus;
 
     public TextMeshProUGUI levelText;
+
+    public GameObjectEvent MonsterDieEvent;
+
     //[SerializeField] Image HPimage;
     [SerializeField] Slider HPSlider;
     private Collider2D playerCollision = null;
@@ -180,6 +184,6 @@ public class MonsterBehavior : MonoBehaviour
         monster.Die();
 
         // 维护存活怪物列表
-        WaveManager.Instance.livingMonsters.Remove(gameObject);
+        MonsterDieEvent.Raise(gameObject);
     }
 }

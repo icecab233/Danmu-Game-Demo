@@ -63797,6 +63797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerType: 0
   playerStatus: 0
+  uid: 0
   playerName: 
   level: 0
   hp: 100

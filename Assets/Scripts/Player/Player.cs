@@ -41,6 +41,7 @@ public partial class Player : MonoBehaviour
     }
     public PlayerStatus playerStatus;
 
+    public int uid;
     public string playerName;
     public int level;
     public int hp;

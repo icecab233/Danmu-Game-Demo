@@ -205,4 +205,10 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
     }
+
+    // 由事件监听调用，当怪物死亡时把怪物gameobject传过来
+    public void OnMonsterDie(GameObject monsterObject)
+    {
+        livingMonsters.Remove(monsterObject);
+    }
 }

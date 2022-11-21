@@ -720,6 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerType: 2
   playerStatus: 0
+  uid: 0
   playerName: 
   level: 0
   hp: 0
@@ -739,7 +740,7 @@ MonoBehaviour:
   rageFX: {fileID: 0}
   OnPlayerDieEvent: {fileID: 0}
   OnPlayerLevelUpEvent: {fileID: 0}
-  playerEquipData: {fileID: 0}
+  equipData: {fileID: 0}
   weaponType: 0
 --- !u!61 &1983508403575181537
 BoxCollider2D:

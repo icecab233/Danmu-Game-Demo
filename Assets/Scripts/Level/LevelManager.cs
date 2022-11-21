@@ -30,6 +30,9 @@ public class LevelManager : MonoBehaviour
     // 设置关卡背景图片的引用
     public SpriteRenderer bgSpriteRenderer;
 
+    // 判断是否在重开的进程中了，防止多次重开
+    public bool isInRestartCoroutine = false;
+
     // 是否在重新开始等待时间
     public bool preparingRestart = false;
     public float preparingTime = 10.0f;
@@ -129,15 +132,19 @@ public class LevelManager : MonoBehaviour
     // 由Event Listener组件调用
     public void GameFail()
     {
-        // 显示游戏失败信息
-        GameObject popUpObject = Instantiate(fullScreenPopUp, mainCanvas);
-        popUpObject.GetComponent<FullScreenPopUp>().showText = ConstantText.gameFail;
+        if (!isInRestartCoroutine)
+        {
+            // 显示游戏失败信息
+            GameObject popUpObject = Instantiate(fullScreenPopUp, mainCanvas);
+            popUpObject.GetComponent<FullScreenPopUp>().showText = ConstantText.gameFail;
 
-        StartCoroutine(RestartGameCoroutine());
+            StartCoroutine(RestartGameCoroutine());
+        }
     }
 
     IEnumerator RestartGameCoroutine()
     {
+        isInRestartCoroutine = true;
         yield return new WaitForSeconds(5.0f);
         preparingRestart = true;
         preparingStartTime = Time.time;
@@ -146,6 +153,7 @@ public class LevelManager : MonoBehaviour
 
         levelNow = 0;
         InitLevel(levelNow);
+        isInRestartCoroutine = false;
     }
 
 

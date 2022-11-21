@@ -314,6 +314,7 @@ MonoBehaviour:
   level: 0
   currentMonsterStatus: 0
   levelText: {fileID: 7184106411992285314}
+  MonsterDieEvent: {fileID: 11400000, guid: ded852ceebc25ff4b9fea6f2cafc389e, type: 2}
   HPSlider: {fileID: 7736864504239935018}
 --- !u!50 &2709712609185104638
 Rigidbody2D:

@@ -5352,40 +5352,13 @@ MonoBehaviour:
   levelText: {fileID: 1185443120687480240}
   HPSlider: {fileID: 3399107485577577374}
   EXPSlider: {fileID: 5566328417780310221}
-  levelFlags:
-  - {fileID: 21300000, guid: 2e50f1aeaa95ff4429ca634cfdb6b14e, type: 3}
-  - {fileID: 21300000, guid: 2e50f1aeaa95ff4429ca634cfdb6b14e, type: 3}
-  - {fileID: 21300000, guid: 2e50f1aeaa95ff4429ca634cfdb6b14e, type: 3}
-  - {fileID: 21300000, guid: 2e50f1aeaa95ff4429ca634cfdb6b14e, type: 3}
-  - {fileID: 21300000, guid: 2e50f1aeaa95ff4429ca634cfdb6b14e, type: 3}
-  - {fileID: 21300000, guid: 2e50f1aeaa95ff4429ca634cfdb6b14e, type: 3}
-  - {fileID: 21300000, guid: 75fee6ff01a79064ca6e8bbbd2467bcd, type: 3}
-  - {fileID: 21300000, guid: 75fee6ff01a79064ca6e8bbbd2467bcd, type: 3}
-  - {fileID: 21300000, guid: 75fee6ff01a79064ca6e8bbbd2467bcd, type: 3}
-  - {fileID: 21300000, guid: 75fee6ff01a79064ca6e8bbbd2467bcd, type: 3}
-  - {fileID: 21300000, guid: 75fee6ff01a79064ca6e8bbbd2467bcd, type: 3}
-  - {fileID: 21300000, guid: 75fee6ff01a79064ca6e8bbbd2467bcd, type: 3}
-  - {fileID: 21300000, guid: 25c840cd6c4c03745be52e5656740d34, type: 3}
-  - {fileID: 21300000, guid: 25c840cd6c4c03745be52e5656740d34, type: 3}
-  - {fileID: 21300000, guid: 25c840cd6c4c03745be52e5656740d34, type: 3}
-  - {fileID: 21300000, guid: 25c840cd6c4c03745be52e5656740d34, type: 3}
-  - {fileID: 21300000, guid: 25c840cd6c4c03745be52e5656740d34, type: 3}
-  - {fileID: 21300000, guid: eadac55f57dc96d4c8ba85f4c84faf32, type: 3}
-  - {fileID: 21300000, guid: eadac55f57dc96d4c8ba85f4c84faf32, type: 3}
-  - {fileID: 21300000, guid: eadac55f57dc96d4c8ba85f4c84faf32, type: 3}
-  - {fileID: 21300000, guid: e59a816b2f7bd6f418fe85f5c57ea625, type: 3}
-  - {fileID: 21300000, guid: e59a816b2f7bd6f418fe85f5c57ea625, type: 3}
-  - {fileID: 21300000, guid: e59a816b2f7bd6f418fe85f5c57ea625, type: 3}
-  - {fileID: 21300000, guid: 0cbaa2af0f4a3a944a7f6300648bceae, type: 3}
-  - {fileID: 21300000, guid: 0cbaa2af0f4a3a944a7f6300648bceae, type: 3}
-  - {fileID: 21300000, guid: 0cbaa2af0f4a3a944a7f6300648bceae, type: 3}
-  - {fileID: 21300000, guid: 0cbaa2af0f4a3a944a7f6300648bceae, type: 3}
   levelFlagImage: {fileID: 1185443121361041819}
   playerLevelData: {fileID: 11400000, guid: cb9f6386aede36d4eb0d3035829fca85, type: 2}
   levelUpFX: {fileID: 3447562034396205120}
   rageFX: {fileID: 1135163843029399633}
   OnPlayerDieEvent: {fileID: 11400000, guid: aaac0d57edc5bbe4d92fab2da920fdd4, type: 2}
   OnPlayerLevelUpEvent: {fileID: 11400000, guid: c68fcc46f2ec1334c814681e35cdfc68, type: 2}
+  equipData: {fileID: 0}
   weaponType: 0
 --- !u!114 &5028197871096466659
 MonoBehaviour:
