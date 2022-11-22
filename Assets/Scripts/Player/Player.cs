@@ -117,28 +117,17 @@ public partial class Player : MonoBehaviour
             UpdateEquip();
         }
 
-        switch (playerType)
+        if (playerType == PlayerType.defender)
         {
-            case PlayerType.archer:
-                playerWeapon = GetComponent<PlayerBow>();
-                displayText();
-                break;
-            case PlayerType.warrior:
-                break;
-            case PlayerType.defender:
-                // 重写无敌防御者的属性
-                hpMax = 1000000;
-                hp = 100000;
-                attack = 0;
-                attackSpeed = 0;
-                attackTime = 0f;
-                break;
-            case PlayerType.wizard:
-                playerWeapon = GetComponent<PlayerMage>();
-                break;
-            case PlayerType.gunner:
-                playerWeapon = GetComponent<PlayerGun>();
-                break;
+            // 重写无敌防御者的属性
+            hpMax = 1000000;
+            hp = 100000;
+            attack = 0;
+            attackSpeed = 0;
+            attackTime = 0f;
+        } else
+        {
+            displayText();
         }
     }
 

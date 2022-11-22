@@ -9,7 +9,8 @@ public static class DatabaseManager
 
     static DatabaseManager()
     {
-        mysql = new MySqlAccess("81.68.234.49", "3306", "dagu", "Tony6666", "nia");
+        mysql = new MySqlAccess("120.46.190.10", "3306", "root", "DanmuGame2022", "game");
+        //mysql = new MySqlAccess("81.68.234.49", "3306", "dagu", "Tony6666", "nia");
         mysql.CloseSql();
     }
 
@@ -33,7 +34,7 @@ public static class DatabaseManager
                 formulatedEquip += "'";
             }
 
-            string cmd = "INSERT INTO nia.Player(playerUID,playerName,level,exp," +
+            string cmd = "INSERT INTO Player(playerUID,playerName,level,exp," +
                 "helmet,armor,hair,eyebrows,eyes,mouth) VALUES (" + uid + ",'" + playerName
                 + "'," + level + "," + exp + formulatedEquip + ")";
             Debug.Log(cmd);
@@ -44,7 +45,7 @@ public static class DatabaseManager
         {
             // 更新玩家
 
-            string cmd = "UPDATE nia.Player SET level="+level+", exp="+exp+", helmet='"+equip[0]+
+            string cmd = "UPDATE Player SET level="+level+", exp="+exp+", helmet='"+equip[0]+
                 "', armor='"+equip[1]+"', hair='"+equip[2]+"', eyebrows='"+equip[3]+
                 "', eyes='"+equip[4]+"', mouth='"+equip[5]+ "' WHERE playerUID=" + uid+";";
             Debug.Log(cmd);
